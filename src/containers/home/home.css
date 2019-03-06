@@ -1,0 +1,29 @@
+.gridcontainer{
+   display: grid;
+   grid-template-columns: auto auto auto;
+   grid-gap: 10px;
+   padding:10px;
+    
+}
+
+.column:nth-child(even){
+    background-color: rgb(226, 253, 244);
+}
+
+.column:nth-child(odd){
+    background-color: rgb(231, 231, 250);
+}
+.column{
+    border-radius: 8px;
+}
+img{
+    width: 95%;
+    padding-top: 10px;
+    border-radius: 50%;
+}
+#bts>button{
+    min-width: 80px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 10px;
+}
