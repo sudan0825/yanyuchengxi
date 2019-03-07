@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import Profile from '../../components/home/profiles';
+import { Link } from 'react-router-dom'
 import './home.css';
 
 
 class Homepage extends Component {
     state = {
         employee: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-        profile: [],
+        profiles: [],
 
     }
 
@@ -22,7 +23,7 @@ class Homepage extends Component {
             } else {
                 g = "male"
             }
-            return <Profile name={i} key={i} title={i} description={i} gender={g}></Profile>
+            return <Link to={"personalprofile?id="+i} key={i} ><Profile name={i} title={i} description={i} gender={g}></Profile></Link>
         });
         this.setState({profiles:newprofiles})
     }

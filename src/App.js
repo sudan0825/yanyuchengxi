@@ -8,6 +8,7 @@ import Activites from './containers/activities/activities';
 import Aboutus from './components/aboutus/aboutus';
 import Login from './containers/login/login';
 import Profile from './containers/login/profile';
+import Personalprofile from './components/home/Personalprofile'
 class App extends Component {
 
  
@@ -17,7 +18,9 @@ routes = (
   <Route path="/home" exact component={Homepage}></Route>
   <Route path="/activities" component={Activites}></Route>
   <Route path="/aboutus" component={Aboutus}></Route>
-  <Route path="/profile" component={Profile} ></Route>
+ 
+  <Route path="/personalprofile" component={Personalprofile} ></Route>
+  <Route path="/profile"  exact component={Profile} ></Route>
   <Route path="/login" component={Login} ></Route>
   </Switch>
 )
