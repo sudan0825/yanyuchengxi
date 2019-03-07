@@ -51,8 +51,8 @@ class Profile extends Component {
             Height: {
                 elemType: 'select',
                 elemConfig: {
-                    option: ['5\'', '5\'1"', '5\'2"', '5\'3"', '5\'4\"', '5\'5"', '5\'6"',
-                        '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'']
+                    option: ['5\'0"', '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"',
+                        '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"']
                 }
             },
             BodyShape: {
@@ -64,7 +64,8 @@ class Profile extends Component {
             Salary: {
                 elemType: 'input',
                 elemConfig: {
-                    type: 'string'
+                    type: 'string',
+                    placeholder:'Salary'
                 }
             },
             Hobbies: {

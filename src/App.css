@@ -10,7 +10,8 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: rgb(51, 49, 49);
-  border-bottom: 2px groove rgb(206, 191, 191);
+  border-bottom: 3px double rgb(206, 191, 191);
+  
   position: relative;
 }
 .App-header a{
