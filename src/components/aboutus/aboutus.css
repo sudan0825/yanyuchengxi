@@ -1,0 +1,10 @@
+#aboutus{
+    width: 65%;
+    margin: auto;
+    font-size: 22px;
+    color: chocolate;
+}
+#aboutus>p{
+    text-align: left;
+    
+}
