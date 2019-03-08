@@ -16,8 +16,8 @@
     
 }
 #showselection>div{
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    border-left: 3px solid black;
+    border-right: 3px solid black;
     border-bottom: solid 3px black;
     padding: 2px 0;
     width: 30px; 
