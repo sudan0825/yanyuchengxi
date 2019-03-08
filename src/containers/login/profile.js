@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import Input from '../../UIs/input'
+import Input from '../../UIs/input';
+import Submitandcancel from '../../UIs/submitandcancelbutton';
 
 class Profile extends Component {
     state = {
         user: {
-            username:{
+            Username:{
                 elemType:'input',
                 elemConfig:{
                     type:'email',
@@ -19,7 +20,7 @@ class Profile extends Component {
                 valid:false,
                 touched:false
             },
-            password:{
+            Password:{
                 elemType:'input',
                 elemConfig:{
                     type:'password',
@@ -106,7 +107,7 @@ class Profile extends Component {
                 config: this.state.user[elem]
             });
         }
-        console.log(formElementArray)
+        
         let form = (<form>
             {formElementArray.map(elem => {
                 return <Input key={elem.id}
@@ -120,6 +121,7 @@ class Profile extends Component {
                 </Input>
             })
             }
+           <Submitandcancel></Submitandcancel>
 
         </form>)
         return (

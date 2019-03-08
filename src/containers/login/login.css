@@ -27,7 +27,7 @@
     text-align: left;
     margin: auto;
     padding: 15px 26px;
-    border: 2px ridge burlywood;
+    box-shadow: 1px 1px 50px 6px burlywood;
     margin-top: 35px;
     background-color: rgb(243, 233, 220);
    

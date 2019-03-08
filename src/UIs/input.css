@@ -1,0 +1,15 @@
+#subandcel>button{
+
+    width: 33%;
+    min-width: 80px;
+    padding: 8px 15px;
+    font-size: 16px;
+    background-color: antiquewhite;
+    border-radius: 3px;
+    margin: 0 5%;
+
+}
+#subandcel{
+    width: 50%;
+    margin: auto;
+}

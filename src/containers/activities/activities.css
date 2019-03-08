@@ -7,6 +7,8 @@
     font-family: 'Times New Roman', Times, serif;
     padding: 15px;
     cursor: pointer;
+    background-color: #5a57a8;
+    color: antiquewhite;
 
 }
 #activitytable td{

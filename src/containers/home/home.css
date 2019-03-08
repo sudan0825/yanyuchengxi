@@ -1,9 +1,43 @@
+#homepage{
+    position: relative;
+   
+
+}
 .gridcontainer{
    display: grid;
    grid-template-columns: auto auto auto;
    grid-gap: 10px;
    padding:10px;
+   top: 0;
+   left:0;
+   position: relative;
+
+  
     
+}
+#showselection>div{
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: solid 3px black;
+    padding: 2px 0;
+    width: 30px; 
+    margin: auto;
+  
+}
+ 
+#filtersection{
+   
+    width: 90%;
+    height: 0;
+    top: 0;
+    left:5%;
+    background-color: rgb(250, 249, 248);
+    position: absolute;
+    z-index: 5;
+    transition: height 1s;
+    transition-timing-function: ease-in;
+    -webkit-transition-timing-function: ease-in;
+    overflow: hidden;
 }
 
 .column:nth-child(even){
@@ -21,9 +55,15 @@ img{
     padding-top: 10px;
     border-radius: 50%;
 }
+
+#bts{
+    margin: 30px;
+}
+
 #bts>button{
     min-width: 80px;
     padding: 5px 10px;
     border-radius: 5px;
-    margin: 10px;
+    margin: 30px 10px;
+   
 }
