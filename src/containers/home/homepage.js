@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Profile from '../../components/home/profiles';
-import { Link } from 'react-router-dom'
-import './home.css';
+import mystyle from './home.module.css';
 
 
 class Homepage extends Component {
@@ -23,7 +22,7 @@ class Homepage extends Component {
             } else {
                 g = "male"
             }
-            return <Link to={"personalprofile?id=" + i} key={i} ><Profile name={i} title={i} description={i} gender={g}></Profile></Link>
+            return <Profile  key={i} name={i} title={i} description={i} gender={g}></Profile>
         });
         this.setState({ profiles: newprofiles })
     }
@@ -58,6 +57,7 @@ class Homepage extends Component {
 
     }
     showfilters() {
+        console.log("here")
 
         let filters = document.getElementById('filtersection');
         filters.style.height = 350 + 'px';
@@ -84,16 +84,12 @@ class Homepage extends Component {
     render() {
 
         return (
-            <div id="homepage">
-                <div id="showselection" onMouseOver={this.showfilters} onMouseLeave={() => this.hidefilters()}>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-
-
+            <div id="homepage" className={mystyle.homepage}>
+                <div id ="showselection" className={mystyle.showselection}  onMouseLeave={() => this.hidefilters()}>
+                    <div onMouseOver={this.showfilters}>&#x25BC;</div>
                 </div>
 
-                <div id="filtersection">
+                <div id="filtersection" className={mystyle.filtersection}>
                     <h1>Selection</h1>
 
                     <div id="bts" onClick={(e) => this.filtergender(e)}>
@@ -102,7 +98,7 @@ class Homepage extends Component {
                     </div>
                 </div>
 
-                <div className="gridcontainer">
+                <div className={mystyle.gridcontainer}>
 
                     {this.state.profiles}
                 </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Input from '../../UIs/input'
-import './activities.css';
+import mystyle from './activities.module.css';
+import { runInNewContext } from 'vm';
 
 
 class Activities extends Component {
@@ -13,20 +14,15 @@ class Activities extends Component {
         ["15 miles Hiking", "04/20/2019", "Sunnyvale", "94087", 20],
         ["Cooking class with Chef", "09/12/2019", "Cupertino", "94028", 30],
         ["Video Game together", "12/31/2019", "Fremont", "93048", 10]],
-        Filter: {
-            elementType: 'input',
-            elemConfig: {
-                type: 'search',
-                placeholder: "search activity by name or city"
-            }
-        },
+       
         ascending: true
     }
     search() {
         let filter, row, namedata, citydata, i, name, city;
-
-        filter = document.getElementsByClassName("inputUI")[0].children[2].value.toLowerCase();
+      
+        filter = document.getElementById("search").value.toLowerCase();
         row = document.getElementById("activitytable").getElementsByTagName("tr");
+        console.log(row)
         for (i = 1; i < row.length; i++) {
             name = row[i].getElementsByTagName('td')[0];
             city = row[i].getElementsByTagName('td')[2];
@@ -55,8 +51,9 @@ class Activities extends Component {
         }
         this.setState({ td: tabledata, ascending: !sequence })
     }
-
+   
     render() {
+       
         let ths = this.state.th.map((head) => {
             return <th columnname={head} key={head}>{head}</th>
         })
@@ -67,11 +64,13 @@ class Activities extends Component {
             return <tr key={idx + tr.join('')}>{datas}</tr>
         })
         return (<div>
-            <Input
-                elementType={this.state.Filter.elementType}
-                elemConfig={this.state.Filter.elemConfig}
-                changed={this.search}></Input>
-            <table id="activitytable">
+            <input
+                id="search"
+                className={mystyle.search}
+                type = "search"
+                placeholder= "search activity by name or city"
+                onChange={this.search}/>
+            <table id="activitytable" className={mystyle.activitytable}>
                 <caption>Activities & Events</caption>
                 <thead onClick={(e) => this.sorttable(e)}>
                     <tr>{ths}</tr>

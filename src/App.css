@@ -1,18 +1,18 @@
 .App {
   text-align: center;
+  color: rgb(51, 49, 49);
+  background-color: rgb(252, 253, 248);
 }
 
 .App-header {
-  min-height: 100px;
+  height: 150px;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: rgb(51, 49, 49);
+  background-color: rgb(252, 253, 248);
   border-bottom: 3px double rgb(206, 191, 191);
-  
-  position: relative;
+  position: fixed;
+  z-index: 2;
 }
 .App-header a{
   text-decoration: none;
@@ -38,6 +38,7 @@
 .logandsign{
   position: absolute;
   right:20px;
+  top:58px;
 }
 .logandsign>a{
 
@@ -56,6 +57,11 @@ nav{
 }
 .App-link {
   color: #61dafb;
+}
+main{
+  top:160px;
+  position: relative;
+
 }
 
 

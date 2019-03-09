@@ -1,11 +1,18 @@
 import React from 'react';
 import './input.css';
+import mystyle from '../containers/login/login.module.css'
 
 
 
 const input = (props) => {
     let inputElement = null;
+
     const inputClasses = [];
+    if (props.from === 'profile' || props.from === 'login') {
+        inputClasses.push(mystyle[props.class]);
+       
+
+    }
 
     if (props.invalid && props.shouldValidate && props.touched) {
 
@@ -22,13 +29,13 @@ const input = (props) => {
     }
     if (props.elemType === 'inputcheckbox') {
         let config = { ...props.elemConfig }
-        inputClasses.push('checkbox')
-      
+
+
         option = config.option.map((o) => {
             return (
-                <div key={o} className={inputClasses}>
-                <label>{o}</label>
-                <input  type={config.type} />
+                <div key={o} className={inputClasses.join(' ')}>
+                    <label>{o}</label>
+                    <input type={config.type} />
                 </div>
             )
         })
@@ -37,6 +44,7 @@ const input = (props) => {
         case ('input'):
             inputElement = <input
                 className={inputClasses.join(' ')}
+                id={props.label}
                 {...props.elemConfig}
                 value={props.value}
                 onChange={props.changed} />
@@ -47,6 +55,7 @@ const input = (props) => {
         case ('textarea'):
             inputElement = <textarea
                 className={inputClasses.join(' ')}
+                id={props.label}
                 {...props.elemConfig}
                 value={props.value}
                 onChange={props.changed} />
@@ -55,6 +64,7 @@ const input = (props) => {
         case ('select'):
             inputElement = <select
                 className={inputClasses.join(' ')}
+                id={props.label}
                 {...props.elemConfig}
                 value={props.value}
                 onChange={props.changed}>{option}</select>
@@ -63,15 +73,17 @@ const input = (props) => {
         default:
             inputElement = <input
                 className={inputClasses.join(' ')}
+                id={props.label}
                 {...props.elemConfig}
                 value={props.value}
                 onChange={props.changed} />
     }
     return (
-        <div className="inputUI">
-            <label>{props.label} </label>
+        <div >
+            <label >{props.label} 
             <br></br>
             {inputElement}
+            </label>
 
         </div>
     )

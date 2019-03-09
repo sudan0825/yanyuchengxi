@@ -1,4 +1,4 @@
-#homepage{
+.homepage{
     position: relative;
    
 
@@ -15,24 +15,29 @@
   
     
 }
-#showselection>div{
-    border-left: 3px solid black;
-    border-right: 3px solid black;
-    border-bottom: solid 3px black;
-    padding: 2px 0;
-    width: 30px; 
-    margin: auto;
-  
+
+.showselection>div{
+    width: 6%;
+    background-color: rgb(238, 236, 236);
+    border-left:2px ridge rgb(210, 232, 247);
+    border-bottom:2px ridge rgb(210, 232, 247);
+    border-right:2px ridge rgb(210, 232, 247);
+    font-size: 12px;
+    color: rgb(21, 125, 173);
+    position: fixed;
+    left:47%;
+    top:150px;
+    z-index: 3;
+
 }
- 
-#filtersection{
+.filtersection{
    
     width: 90%;
     height: 0;
-    top: 0;
+    top: 150px;
     left:5%;
     background-color: rgb(250, 249, 248);
-    position: absolute;
+    position: fixed;
     z-index: 5;
     transition: height 1s;
     transition-timing-function: ease-in;

@@ -1,52 +1,38 @@
-#loginpage{
+.loginpage{
     width: 50%;
     margin: 50px auto;
-
-}
-
-#loginpage div>input{
-    padding: 5px 10px;
-    width: 88%;
   
+
 }
 
-#loginbt{
-    margin:13px;
-}
-#loginbt>button{
-    min-width: 80px;
-    background-color: antiquewhite;
-    padding: 5px 10px;
-    margin: 10px;
-    font-weight: bolder;
-    
- 
-}
 .editfile{
     width: 56%;
-    text-align: left;
+    text-align: center;
     margin: auto;
     padding: 15px 26px;
-    box-shadow: 1px 1px 50px 6px burlywood;
+    box-shadow: 0 0 30px burlywood;
     margin-top: 35px;
     background-color: rgb(243, 233, 220);
    
 
 }
 
-.inputUI>input,.inputUI>select{
+.inputUI, .selectUI{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     width: 58%;
-    padding: 10px;
+    padding: 6px;
     margin: 12px 0;
     background-color: rgb(240, 236, 232);
     font-size: 16px;
 
 }
-.inputUI textarea{
+.textarea{
     height: 280px;
     overflow: auto;
     padding: 10px;
-    width: 88%;
+    width: 58%;
     margin: 12px 0;
     background-color: rgb(240, 236, 232);
     font-size: 16px;
@@ -61,10 +47,15 @@
     display: table;
     clear: both;
 }
-.inputUI>label{
+label{
     font-size: 16px;
     font-weight: bold;
+    line-height: 30px;
     
+}
+.checkbox label{
+    font-weight: 500;
+   
 }
 .editfile>p{
     font-size: 26px;

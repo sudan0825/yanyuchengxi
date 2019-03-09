@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './login.css';
+import mystyle from './login.module.css';
 import Input from '../../UIs/input';
 import Submitandcancel from '../../UIs/submitandcancelbutton';
 
@@ -18,9 +18,11 @@ class Login extends Component {
                     required: true,
                     email: true
                 },
+                class:'inputUI',
                 valid: false,
                 touched: false
             },
+
             Password: {
                 elemType: 'input',
                 elemConfig: {
@@ -34,6 +36,7 @@ class Login extends Component {
                     minLength: 6,
 
                 },
+                class:'inputUI',
                 valid: false,
                 touched: false
             }
@@ -45,22 +48,27 @@ class Login extends Component {
 
     }
     render() {
+        
         let formfield = []
-        for (let elem in this.state.user) {
+        let user = this.state.user
+        for (let elem in user) {
+            
             formfield.push(<Input key={elem}
-                elemType={elem.elemType}
-                elemConfig={elem.elemConfig}
-                value={elem.value}
-                valid={elem.valid}
-                touched={elem.touched}
+                elemType={user[elem].elemType}
+                elemConfig={user[elem].elemConfig}
+                value={user[elem].value}
+                valid={user[elem].valid}
+                touched={user[elem].touched}
                 label={elem}
+                class={user[elem].class}
+                from = 'login'
                 changed={this.inputchangeHandler}>
             </Input>)
 
         }
 
 
-        return (<div id="loginpage">
+        return (<div className={mystyle.loginpage}>
             <form>
                 <fieldset>
                     <legend>Log in</legend>

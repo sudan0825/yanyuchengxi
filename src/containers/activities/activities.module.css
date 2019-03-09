@@ -1,8 +1,16 @@
-#activitytable{
-    width: 80%;
-    margin: 50px auto;
+.search{
+    width: 58%;
+    padding: 6px;
+    margin: 48px 0;
+    background-color: rgb(240, 236, 232);
+    font-size: 16px;
+
 }
-#activitytable th{
+.activitytable{
+    width: 80%;
+    margin: auto;
+}
+.activitytable th{
     font-size: 18px;
     font-family: 'Times New Roman', Times, serif;
     padding: 15px;
@@ -11,14 +19,15 @@
     color: antiquewhite;
 
 }
-#activitytable td{
+
+.activitytable td{
     padding: 12px 15px;
 }
-#activitytable, #activitytable th, #activitytable td{
+.activitytable, .activitytable th, .activitytable td{
     border: ridge 3px rgb(219, 208, 208);
     border-collapse:collapse;
 }
-#activitytable tr:nth-child(even){
+.activitytable tr:nth-child(even){
     background-color: rgb(231, 231, 250);
 }
 

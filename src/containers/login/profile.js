@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Input from '../../UIs/input';
 import Submitandcancel from '../../UIs/submitandcancelbutton';
+import mystyle from './login.module.css'
 
 class Profile extends Component {
     state = {
@@ -10,8 +11,10 @@ class Profile extends Component {
                 elemConfig:{
                     type:'email',
                     placeholder:'User name',
-                    autoComplete:'email'
+                    autoComplete:'email',
+                    
                 },
+                class:'inputUI',
                 value:'',
                 validation:{
                     required:true,
@@ -25,8 +28,10 @@ class Profile extends Component {
                 elemConfig:{
                     type:'password',
                     placeholder:'password',
-                    autoComplete:'current-password'
+                    autoComplete:'current-password',
+                    
                 },
+                class:'inputUI',
                 value:'',
                 validation:{
                     required:true,
@@ -40,8 +45,10 @@ class Profile extends Component {
                 elemType: 'input',
                 elemConfig: {
                     type: 'date',
-                    name: 'bday'
+                    name: 'bday',
+                    
                 },
+                class:'selectUI',
                 value: '',
                 validation: {
                     required: true
@@ -53,44 +60,59 @@ class Profile extends Component {
                 elemType: 'select',
                 elemConfig: {
                     option: ['5\'0"', '5\'1"', '5\'2"', '5\'3"', '5\'4"', '5\'5"', '5\'6"',
-                        '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"']
-                }
+                        '5\'7"', '5\'8"', '5\'9"', '5\'10"', '5\'11"', '6\'0"'],
+                    
+                },
+                class:'selectUI'
             },
             BodyShape: {
                 elemType: 'select',
                 elemConfig: {
-                    option: ['Slender', 'Normal', 'Fat']
-                }
+                    option: ['Slender', 'Average', 'Athletic','Heavyset','any'],
+                    
+                },
+                class:'selectUI',
+                labelvalue:'Body Shape'
             },
             Salary: {
                 elemType: 'input',
                 elemConfig: {
                     type: 'string',
-                    placeholder:'Salary'
-                }
+                    placeholder:'Salary',
+                    
+                },
+                class:"inputUI"
             },
             Hobbies: {
                 elemType: 'inputcheckbox',
                 elemConfig: {
                     type: 'checkbox',
-                    option: ['Reading', 'Working', 'Cooking', 'Drawing', 'Hiking']
-                }
+                    option: ['Reading', 'Working', 'Cooking', 'Drawing', 'Hiking'],
+                    
+                },
+                class:'checkbox'
             },
             Whoareyou: {
                 elemType: 'textarea',
                 elemConfig: {
                     type: 'string',
                     placeholder: "Please introduce yourself. What's your hobbies?" +
-                        "What makes you happy? What kind of relationship are you looking for?"
-                }
+                        "What makes you happy? What kind of relationship are you looking for?",
+                   
+                },
+                labelvalue:'Who are you',
+                class:"textarea"
 
             },
             Whatareyoulookingfor: {
                 elemType: 'textarea',
                 elemConfig: {
                     type: 'string',
-                    placeholder: "Characters? Personalities? Hobbies?"
-                }
+                    placeholder: "Characters? Personalities? Hobbies?",
+                    
+                },
+                labelvalue:'What are you looking for',
+                 class:"textarea"
 
             }
 
@@ -116,8 +138,11 @@ class Profile extends Component {
                     value={elem.config.value}
                     valid={elem.config.valid}
                     touched={elem.config.touched}
-                    label={elem.id}
+                    label={elem.config.labelvalue? elem.config.labelvalue:elem.id}
+                    class={elem.config.class}
+                    from= {'profile'}
                     changed={this.inputchangeHandler}>
+                    
                 </Input>
             })
             }
@@ -125,9 +150,9 @@ class Profile extends Component {
 
         </form>)
         return (
-            <div className="editfile" >
+            <div className={mystyle.editfile} >
                 <div>
-                    <div className="pic"></div>
+                    <div className={mystyle.pic}></div>
                     <div></div>
                 </div>
                 <p >Edit Profile</p>
