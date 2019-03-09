@@ -2,6 +2,9 @@
   text-align: center;
   color: rgb(51, 49, 49);
   background-color: rgb(252, 253, 248);
+  position: relative;
+  
+
 }
 
 .App-header {
@@ -12,7 +15,10 @@
   background-color: rgb(252, 253, 248);
   border-bottom: 3px double rgb(206, 191, 191);
   position: fixed;
+  top:0;
+  left: 0;
   z-index: 2;
+  
 }
 .App-header a{
   text-decoration: none;
@@ -61,6 +67,7 @@ nav{
 main{
   top:160px;
   position: relative;
+
 
 }
 

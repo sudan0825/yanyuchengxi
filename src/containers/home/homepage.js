@@ -60,6 +60,7 @@ class Homepage extends Component {
         console.log("here")
 
         let filters = document.getElementById('filtersection');
+        
         filters.style.height = 350 + 'px';
 
     }

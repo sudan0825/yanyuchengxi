@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import NavList from './components/navigation/navList';
-import Homepage from './containers/home/homepage';
-
 import { Route, Switch, BrowserRouter, Redirect, Link } from 'react-router-dom';
+import Homepage from './containers/home/homepage';
 import Activites from './containers/activities/activities';
 import Aboutus from './components/aboutus/aboutus';
 import Login from './containers/login/login';
@@ -21,12 +20,12 @@ routes = (
     <Route exact path="/" render={() => (
       this.state.loggedin ? (<Redirect to="/home" />) : (<Login/>)
     )} />
-    <Route path="/home" exact component={Homepage}></Route>
-    <Route path="/activities" component={Activites}></Route>
     <Route path="/aboutus" component={Aboutus}></Route>
     <Route path="/personalprofile" component={Personalprofile} ></Route>
     <Route path="/profile" exact component={Profile} ></Route>
     <Route path="/login" component={Login} ></Route>
+    <Route path="/home" exact component={Homepage}></Route>
+    <Route path="/activities" component={Activites}></Route>
   </Switch>
 )
 render() {
@@ -39,9 +38,6 @@ render() {
           <nav>
             <NavList />
           </nav>
-          {/* <div id="login">
-              <Link to="login">Log in</Link>
-            </div> */}
           <div className="logandsign">
             <Link to="profile">Sign Up</Link>
           </div>

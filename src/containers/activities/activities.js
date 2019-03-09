@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Input from '../../UIs/input'
+
 import mystyle from './activities.module.css';
-import { runInNewContext } from 'vm';
+
 
 
 class Activities extends Component {
