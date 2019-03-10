@@ -26,6 +26,7 @@ routes = (
     <Route path="/login" component={Login} ></Route>
     <Route path="/home" exact component={Homepage}></Route>
     <Route path="/activities" component={Activites}></Route>
+ 
   </Switch>
 )
 render() {

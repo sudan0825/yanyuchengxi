@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import Profile from '../../components/home/profiles';
 import mystyle from './home.module.css';
+import Filters from './filtersection';
+
 
 
 class Homepage extends Component {
     state = {
         employee: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
         profiles: [],
+        isSelectionShow: false
 
     }
 
@@ -22,81 +25,50 @@ class Homepage extends Component {
             } else {
                 g = "male"
             }
-            return <Profile  key={i} name={i} title={i} description={i} gender={g}></Profile>
+            return <Profile key={i} name={i} title={i} description={i} gender={g}></Profile>
         });
         this.setState({ profiles: newprofiles })
     }
 
-    filtergender(e) {
-        let left;
 
-        if (e.target.value === 'female') {
-            left = 0;
-
-        } else if (e.target.value === 'male') {
-            left = 1;
-        } else {
-            return
-        }
-
-        let newprofiles = this.state.employee.map((e, i) => {
-
-            if (i % 2 === left) {
-                let g;
-                if (left === 0) g = "female";
-                else {
-                    g = "male"
-                }
-                return <Profile name={i} key={i} title={i} description={i} gender={g}></Profile>
-            }
-
-
-
-        })
-        this.setState({ profiles: newprofiles })
-
-    }
     showfilters() {
-        console.log("here")
-
         let filters = document.getElementById('filtersection');
-        
-        filters.style.height = 350 + 'px';
+
+        filters.style.height = 320 + 'px';
+        filters.style["boxShadow"] = '1px 1px 5px 2px rgb(214, 211, 207)';
+        this.setState({ isSelectionShow: true })
+        this.hide(filters)
 
     }
 
-    hidefilters() {
 
-        document.body.addEventListener('mouseover', hide);
-        let filters = document.getElementById('filtersection');
-        function hide(e) {
-
-            if (e.target === filters || e.target.parentNode === filters || e.target.parentNode.parentNode === filters) {
-
-                filters.style.height = 350;
-                filters.style["boxShadow"]= '1px 1px 5px 2px rgb(214, 211, 207)';
-
-            } else {
-                filters.style.height = 0;
-                filters.style["boxShadow"]=''
-            }
-        }
+    hide(filters) {
+            filters.addEventListener('mouseleave', () => {
+                if (this.state.isSelectionShow) {
+                    filters.style.height = 0;
+                    filters.style["boxShadow"] = '';
+                    this.setState({ isSelectionShow: false })
+                }
+                filters.addEventListener('mouseenter', () => {
+                    this.showfilters()
+                })
+            })
+           
     }
     render() {
 
         return (
             <div id="homepage" className={mystyle.homepage}>
-                <div id ="showselection" className={mystyle.showselection}  onMouseLeave={() => this.hidefilters()}>
-                    <div onMouseOver={this.showfilters}>&#x25BC;</div>
+                <div id="showselection" className={mystyle.showselection}>
+                    <div onMouseOver={() => this.showfilters()}>&#x25BC;</div>
                 </div>
 
-                <div id="filtersection" className={mystyle.filtersection}>
+                <div id="filtersection" className={mystyle.filtersection} >
                     <h1>Selection</h1>
+                    <Filters></Filters>
 
-                    <div id="bts" onClick={(e) => this.filtergender(e)}>
-                        <input type="radio" name="gender" value="female" />female
-                        <input type="radio" name="gender" value="male" />male
-                    </div>
+
+
                 </div>
 
                 <div className={mystyle.gridcontainer}>

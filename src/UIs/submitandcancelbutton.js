@@ -3,7 +3,8 @@ import React from 'react';
 const Submitandcancel = (props)=>{
     return (
     <div id='subandcel'>
-    <button>Submit</button> <button>Cancel</button>
+    <button onClick={props.submit}>Submit</button> 
+    <button onClick={props.cancel}>Cancel</button>
     </div>)
 }
 

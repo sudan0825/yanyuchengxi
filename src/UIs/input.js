@@ -10,7 +10,7 @@ const input = (props) => {
     const inputClasses = [];
     if (props.from === 'profile' || props.from === 'login') {
         inputClasses.push(mystyle[props.class]);
-       
+
 
     }
 
@@ -26,6 +26,8 @@ const input = (props) => {
 
             return <option key={o} value={o} >{o}</option>
         })
+
+
     }
     if (props.elemType === 'inputcheckbox') {
         let config = { ...props.elemConfig }
@@ -80,9 +82,9 @@ const input = (props) => {
     }
     return (
         <div >
-            <label >{props.label} 
-            <br></br>
-            {inputElement}
+            <label >{props.label}
+                <br></br>
+                {inputElement}
             </label>
 
         </div>

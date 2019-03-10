@@ -14,28 +14,38 @@ class Activities extends Component {
         ["15 miles Hiking", "04/20/2019", "Sunnyvale", "94087", 20],
         ["Cooking class with Chef", "09/12/2019", "Cupertino", "94028", 30],
         ["Video Game together", "12/31/2019", "Fremont", "93048", 10]],
-       
-        ascending: true
+
+        ascending: true,
+        timer: null
+
     }
     search() {
+        
         let filter, row, namedata, citydata, i, name, city;
-      
-        filter = document.getElementById("search").value.toLowerCase();
-        row = document.getElementById("activitytable").getElementsByTagName("tr");
-        console.log(row)
-        for (i = 1; i < row.length; i++) {
-            name = row[i].getElementsByTagName('td')[0];
-            city = row[i].getElementsByTagName('td')[2];
-            namedata = name.textContent || name.innerText;
-            citydata = city.textContent || city.innerText;
-            if (namedata.toLowerCase().indexOf(filter) !== -1 ||
-                citydata.toLowerCase().indexOf(filter) !== -1) {
-                row[i].style.display = "";
-            } else {
-                row[i].style.display = "none"
-            }
+       
+        if(this.state.timer){
+            clearTimeout(this.state.timer)
         }
+        this.setState({timer:setTimeout(function(){
+            filter = document.getElementById("search").value.toLowerCase();
+            row = document.getElementById("activitytable").getElementsByTagName("tr");
+            for (i = 1; i < row.length; i++) {
+                name = row[i].getElementsByTagName('td')[0];
+                city = row[i].getElementsByTagName('td')[2];
+                namedata = name.textContent || name.innerText;
+                citydata = city.textContent || city.innerText;
+                if (namedata.toLowerCase().indexOf(filter) !== -1 ||
+                    citydata.toLowerCase().indexOf(filter) !== -1) {
+                    row[i].style.display = "";
+                } else {
+                    row[i].style.display = "none"
+                }
+            }
+    
+
+        },1000)})
     }
+
     sorttable(e) {
 
         let n = this.state.th.indexOf(e.target.innerText.trim());
@@ -51,9 +61,9 @@ class Activities extends Component {
         }
         this.setState({ td: tabledata, ascending: !sequence })
     }
-   
+
     render() {
-       
+
         let ths = this.state.th.map((head) => {
             return <th columnname={head} key={head}>{head}</th>
         })
@@ -67,9 +77,9 @@ class Activities extends Component {
             <input
                 id="search"
                 className={mystyle.search}
-                type = "search"
-                placeholder= "search activity by name or city"
-                onChange={this.search}/>
+                type="search"
+                placeholder="search activity by name or city"
+                onChange={()=>this.search()} />
             <table id="activitytable" className={mystyle.activitytable}>
                 <caption>Activities & Events</caption>
                 <thead onClick={(e) => this.sorttable(e)}>

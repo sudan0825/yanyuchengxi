@@ -16,6 +16,7 @@
     
 }
 
+
 .showselection>div{
     width: 6%;
     background-color: rgb(238, 236, 236);
@@ -32,8 +33,8 @@
 }
 .filtersection{
    
-    width: 90%;
-    height: 0;
+    width: 88%;
+    height: 0px;
     top: 150px;
     left:5%;
     background-color: rgb(250, 249, 248);
@@ -43,6 +44,27 @@
     transition-timing-function: ease-in;
     -webkit-transition-timing-function: ease-in;
     overflow: hidden;
+}
+.selections{
+    display: flex;
+    justify-content: space-around;
+}
+.selectUIdiv>p{
+    font-size: 16px;
+    font-weight: 800;
+
+}
+.selectUIdiv div{
+   display: inline;
+   
+}
+.selectUIdiv label{
+    font-weight: 500;
+    margin: 22px;
+}
+
+.selectUIdiv option{
+    padding: 3px;
 }
 
 .column:nth-child(even){
