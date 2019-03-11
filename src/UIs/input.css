@@ -12,5 +12,36 @@
 }
 #subandcel{
     width: 50%;
-    margin: auto;
+    margin: 30px auto;
+}
+
+#curtain{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgb(227, 250, 250,0.6);
+    z-index: 5;
+    overflow: auto;
+   
+   
+  }
+#curtain>div{
+   
+      width: 46%;
+      margin: 130px auto;
+      background-color: rgb(118, 180, 216);
+      padding: 50px;
+      color: rgb(240, 223, 192);
+      border-radius: 10px;
+      box-shadow:1px 1px 10px #0f6496;
+      
+  }
+
+#curtain input{
+    padding: 5px;
+    width: 66%;
+    border-radius: 4px;
+    font-size: 14px;
 }

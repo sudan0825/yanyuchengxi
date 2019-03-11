@@ -7,6 +7,7 @@ import mystyle from '../containers/login/login.module.css'
 const input = (props) => {
     let inputElement = null;
 
+
     const inputClasses = [];
     if (props.from === 'profile' || props.from === 'login') {
         inputClasses.push(mystyle[props.class]);

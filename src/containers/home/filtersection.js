@@ -143,7 +143,7 @@ class Filtersection extends Component {
 
 
                     error['wrongAge'] = "Please input a valid age range"
-                    this.setState({ errorMessage: error }, console.log(this.state.errorMessage))
+                    this.setState({ errorMessage: error })
                     return
                 }
             }
@@ -177,7 +177,13 @@ class Filtersection extends Component {
             str += i + " : " + data[i] + " "
         }
 
-        window.alert("query is\n" + str);
+        if( window.confirm("query is\n" + str)){
+           
+            setTimeout(()=>{window.alert("information is sent")},500);
+        }else{
+            setTimeout(()=>{window.alert("your request is canceled")},500)
+        }
+       
         this.cancel()
 
     }

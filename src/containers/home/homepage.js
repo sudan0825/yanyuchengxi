@@ -7,17 +7,16 @@ import Filters from './filtersection';
 
 class Homepage extends Component {
     state = {
-        employee: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+        employee: new Array(30).fill(),
         profiles: [],
         isSelectionShow: false
 
     }
-
-
     componentDidMount() {
         this.init()
     }
     init() {
+       
         let newprofiles = this.state.employee.map((e, i) => {
             let g
             if (i % 2 === 0) {

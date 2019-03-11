@@ -1,7 +1,23 @@
+#plussign{
+   
+    width: 300px;
+    margin: auto;
+}
+
+#plussign>img{
+    width: 50px;
+    height: auto;
+    float: left;
+}
+#plussign>p{
+    display: inline-block;
+    font-weight: 600;
+
+}
 .search{
     width: 58%;
     padding: 6px;
-    margin: 48px 0;
+    margin: 22px 0;
     background-color: rgb(240, 236, 232);
     font-size: 16px;
 
