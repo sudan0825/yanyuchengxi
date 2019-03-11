@@ -193,7 +193,8 @@ class Filtersection extends Component {
         for (let q in newqueries) {
             newqueries[q] = null
         }
-        
+        document.getElementById('filtersection').style.height = 0;
+        document.getElementById('filtersection').style["boxShadow"] = '';
         this.setState({ query: newqueries})
        
     }
@@ -202,7 +203,8 @@ class Filtersection extends Component {
 
         return (
             <div>
-                <div className={mystyle.selections}>
+                <div id="selections"
+                    className={mystyle.selections}>
                     {this.state.filterInfo}
 
 

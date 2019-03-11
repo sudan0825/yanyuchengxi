@@ -16,7 +16,7 @@ class Homepage extends Component {
         this.init()
     }
     init() {
-       
+
         let newprofiles = this.state.employee.map((e, i) => {
             let g
             if (i % 2 === 0) {
@@ -32,9 +32,18 @@ class Homepage extends Component {
 
     showfilters() {
         let filters = document.getElementById('filtersection');
-
-        filters.style.height = 320 + 'px';
-        filters.style["boxShadow"] = '1px 1px 5px 2px rgb(214, 211, 207)';
+        var x = window.matchMedia("(max-width: 500px)")
+        if (x.matches) {
+            filters.style.height = 400 + 'px';
+            filters.style.overflow = "auto"
+            let selections = document.getElementById('selections');
+            selections.style.flexDirection = "column"
+            
+        } else {
+            filters.style.height = 320 + 'px';
+            
+        }
+        filters.style["boxShadow"] = '2px 2px 50px 10px rgb(214, 211, 207)';
         this.setState({ isSelectionShow: true })
         this.hide(filters)
 
@@ -42,17 +51,17 @@ class Homepage extends Component {
 
 
     hide(filters) {
-            filters.addEventListener('mouseleave', () => {
-                if (this.state.isSelectionShow) {
-                    filters.style.height = 0;
-                    filters.style["boxShadow"] = '';
-                    this.setState({ isSelectionShow: false })
-                }
-                filters.addEventListener('mouseenter', () => {
-                    this.showfilters()
-                })
+        filters.addEventListener('mouseleave', () => {
+            if (this.state.isSelectionShow) {
+                filters.style.height = 0;
+                filters.style["boxShadow"] = '';
+                this.setState({ isSelectionShow: false })
+            }
+            filters.addEventListener('mouseenter', () => {
+                this.showfilters()
             })
-           
+        })
+
     }
     render() {
 
