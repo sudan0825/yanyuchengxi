@@ -12,7 +12,7 @@ class Activities extends Component {
         th: ["Activity/Event name", "Date", "City", "Zip", "Participants"],
         td: [["Grocery Shopping", "05/06/2019", "Sunnyvale", "94086", 10],
         ["Drawing Class", "03/30/2019", "Santa Clara", "95051", 31],
-        ["10 miles Hiking", "04/03/2019", " Mountain view", " 95003", 18],
+        ["10 miles Hiking", "04/03/2019", "Mountain view", " 95003", 18],
         ["15 miles Hiking", "04/20/2019", "Sunnyvale", "94087", 20],
         ["Cooking class with Chef", "09/12/2019", "Cupertino", "94028", 30],
         ["Video Game together", "12/31/2019", "Fremont", "93048", 10]],
@@ -71,10 +71,11 @@ class Activities extends Component {
         if (this.state.timer) {
             clearTimeout(this.state.timer)
         }
+        filter = document.getElementById("search").value.toLowerCase();
+        row = document.getElementById("activitytable").getElementsByTagName("tr");
         this.setState({
             timer: setTimeout(function () {
-                filter = document.getElementById("search").value.toLowerCase();
-                row = document.getElementById("activitytable").getElementsByTagName("tr");
+                
                 for (i = 1; i < row.length; i++) {
                     name = row[i].getElementsByTagName('td')[0];
                     city = row[i].getElementsByTagName('td')[2];
@@ -89,22 +90,36 @@ class Activities extends Component {
                 }
 
 
-            }, 1000)
+            }, 300)
         })
     }
 
     sorttable(e) {
 
         let n = this.state.th.indexOf(e.target.innerText.trim());
-
+ 
         let tabledata = this.state.td.slice();
         let sequence = this.state.ascending;
 
         if (sequence) {
+            if(n === 4){
+                tabledata.sort((a, b) => a[n]-b[n])
 
-            tabledata.sort((a, b) => (a[n] + "").localeCompare(b[n] + ""))
+            }else{
+                tabledata.sort((a, b) => (a[n] + "").trim().localeCompare((b[n] + "").trim()))
+
+            }
+
+            
         } else {
-            tabledata.sort((a, b) => (b[n] + "").localeCompare(a[n] + ""))
+            if(n === 4){
+                tabledata.sort((a, b) => b[n]-a[n])
+
+            }else{
+                tabledata.sort((a, b) => (b[n] + "").trim().localeCompare((a[n]+ "").trim() ))
+
+            }
+            
         }
         this.setState({ td: tabledata, ascending: !sequence })
     }

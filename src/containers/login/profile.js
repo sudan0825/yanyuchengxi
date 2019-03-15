@@ -83,6 +83,16 @@ class Profile extends Component {
                 },
                 class:"inputUI"
             },
+            Education: {
+                elemType: 'select',
+                elemConfig: {
+                    option: ['Some college', 'Associates degree', 'Bachelors degree',
+                    'Graduate degree','PhD/Post Doctoral', 'No Answer'],
+                    
+                },
+                class:'selectUI'
+                
+            },
             Hobbies: {
                 elemType: 'inputcheckbox',
                 elemConfig: {

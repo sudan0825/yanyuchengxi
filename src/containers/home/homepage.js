@@ -7,7 +7,7 @@ import Filters from './filtersection';
 
 class Homepage extends Component {
     state = {
-        employee: new Array(30).fill(),
+        employee: new Array(40).fill(),
         profiles: [],
         isSelectionShow: false
 
@@ -34,13 +34,15 @@ class Homepage extends Component {
         let filters = document.getElementById('filtersection');
         var x = window.matchMedia("(max-width: 500px)")
         if (x.matches) {
-            filters.style.height = 400 + 'px';
+            filters.style.height = '95%';
+            filters.style.top = 10 + 'px';
             filters.style.overflow = "auto"
             let selections = document.getElementById('selections');
             selections.style.flexDirection = "column"
             
         } else {
             filters.style.height = 320 + 'px';
+            filters.style.top = 150+ 'px';
             
         }
         filters.style["boxShadow"] = '2px 2px 50px 10px rgb(214, 211, 207)';
@@ -68,7 +70,7 @@ class Homepage extends Component {
         return (
             <div id="homepage" className={mystyle.homepage}>
                 <div id="showselection" className={mystyle.showselection}>
-                    <div onMouseOver={() => this.showfilters()}>&#x25BC;</div>
+                    <div  onMouseOver={() => this.showfilters()}>&#x25BC;</div>
                 </div>
 
                 <div id="filtersection" className={mystyle.filtersection} >

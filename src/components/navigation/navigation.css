@@ -18,10 +18,13 @@ ul{
     transition: 0.4s;
    
 }
-.navlink:hover{
+.navlink:hover, .activeLink{
     background-color: rgb(106, 168, 223);
     color: aquamarine;
 }
+
+
+
 .navlink:active{
     color: rgb(51, 49, 49);
 }

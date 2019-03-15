@@ -159,7 +159,7 @@ class Filtersection extends Component {
             } else {
                 if (Number(data['distanceTo']) < Number(data['distanceFrom'])) {
                     error['wrongDistance'] = "Please input a valid distance range";
-                    console.log("distance errot", error)
+                    
                     this.setState({ errorMessage: error })
                     return
                 }

@@ -4,6 +4,7 @@ import Input from '../../UIs/input';
 import Submitandcancel from '../../UIs/submitandcancelbutton';
 
 class Login extends Component {
+
     state = {
         user: {
             Username: {
@@ -18,7 +19,7 @@ class Login extends Component {
                     required: true,
                     email: true
                 },
-                class:'inputUI',
+                class: 'inputUI',
                 valid: false,
                 touched: false
             },
@@ -36,7 +37,7 @@ class Login extends Component {
                     minLength: 6,
 
                 },
-                class:'inputUI',
+                class: 'inputUI',
                 valid: false,
                 touched: false
             }
@@ -44,15 +45,16 @@ class Login extends Component {
 
     }
 
+
     inputchangeHandler() {
 
     }
     render() {
-        
+
         let formfield = []
         let user = this.state.user
         for (let elem in user) {
-            
+
             formfield.push(<Input key={elem}
                 elemType={user[elem].elemType}
                 elemConfig={user[elem].elemConfig}
@@ -61,7 +63,7 @@ class Login extends Component {
                 touched={user[elem].touched}
                 label={elem}
                 class={user[elem].class}
-                from = 'login'
+                from='login'
                 changed={this.inputchangeHandler}>
             </Input>)
 
@@ -72,11 +74,13 @@ class Login extends Component {
             <form>
                 <fieldset>
                     <legend>Log in</legend>
+                    <h1>The UI is for demo. Please click on cancle to visit the website</h1>
                     {formfield}
-                    <Submitandcancel></Submitandcancel>
+                    
                 </fieldset>
 
             </form>
+            <Submitandcancel submit={this.props.submit} cancel={this.props.cancel}></Submitandcancel>
 
         </div>)
     }

@@ -9,7 +9,7 @@
 }
 
 .App-header {
-  min-height: 150px;
+  height: 150px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -30,17 +30,17 @@
    color: #a124b7;;
 }
 #logo{
-  width: 50%;
+  width: 52%;
   height: 60px;
   font-size: 36px;
   font-weight: bolder;
-  text-shadow: 4px 4px 10px #530760;
-  color:#a124b7;
+  text-shadow: 3px 3px 6px #2b192e;
+  color:rgb(228, 217, 217);
   margin-bottom: 46px;
 
 }
 #logo>a{
-  color: #a124b7;;
+  color: rgb(223, 228, 217);
 }
 .logandsign{
   position: absolute;
@@ -72,12 +72,11 @@ main{
 
 }
 @media Screen and (max-width:500px){
-  .App-header {
-    height: 250px;
-  }
+ 
   #logo{
-    height: 200px;
+    display: none;
   }
+ 
 }
 
 
