@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import mystyle from './PersonalProfile.module.css';
 import Slider from '../../../components/imagesDiv/slider';
-import Slidein from '../../../components/imagesDiv/slidein';
+
 
 
 
@@ -9,21 +9,25 @@ import Slidein from '../../../components/imagesDiv/slidein';
 class Personalprofile extends Component {
     state = {
         personID: '',
-        images:[],
-        srcs: [require('../../../assets/1.JPG'),require('../../../assets/2.JPG'),require('../../../assets/3.JPG'),
-        require('../../../assets/4.JPG'),require('../../../assets/5.JPG')],
-        imageslide:false
-       
-       
+        images: [],
+        srcs: [require('../../../assets/1.JPG'), require('../../../assets/2.JPG'), require('../../../assets/3.JPG'),
+        require('../../../assets/4.JPG'), require('../../../assets/5.JPG')],
+        imageslide: false,
+        numOfImage:null
+
+
     }
 
 
     componentDidMount() {
         this.setState({ personID: window.location.href.substring(window.location.href.indexOf("=") + 1) })
         let arr = new Array(5).fill(1)
-        this.setState({images:arr})
+        this.setState({ images: arr });
+
 
     }
+
+
     plus() {
         let meter = document.getElementsByTagName('meter')[0];
         if (meter.value < 100) {
@@ -42,7 +46,7 @@ class Personalprofile extends Component {
 
     }
     moveButton() {
-        
+
         document.getElementById('bar').addEventListener('mousemove', this.mousepostion);
 
     }
@@ -63,56 +67,94 @@ class Personalprofile extends Component {
         document.getElementById('bar').removeEventListener('mousemove', this.mousepostion);
     }
     changeslider() {
-     
-    }
-    prev(){
-        
-        let arr =[...this.state.srcs] 
-        let img = arr.pop();
-        arr.unshift(img);
-       
-        this.setState({srcs:arr, imageslide:true})
 
     }
-    next(){
-        let arr =[...this.state.srcs] 
-        let img = arr.shift();
-        arr.push(img);
+    componentDidUpdate(){
+       
+    }
+    showmodalImage(e){
+       
+        this.setState({numOfImage: e.target.alt},()=>{
+       
+            if(this.state.numOfImage !== null){
+               
+                document.getElementById('curtain').style.display = "block"
+            }
+        })
+
+    }
+    closebackkdrop(e){
+
+        if(e.target === e.currentTarget){
+            document.getElementById('curtain').style.display = "none";
+            this.setState({numOfImage:null})
+        }
+
+    }
+    prev() {
+       let numberOfImage = this.state.numOfImage;
+
+       numberOfImage--;
+        if(numberOfImage<0){
+            numberOfImage=this.state.srcs.length-1;
+        }
+        this.setState({numOfImage:numberOfImage})
+        document.getElementById('slideImage').src = this.state.srcs[numberOfImage];
+        document.getElementById('slideImage').alt = numberOfImage;
+
+
+    }
+    next(a) {
+        let numberOfImage = this.state.numOfImage;
         
-        this.setState({srcs:arr, imageslide:true})
+        numberOfImage++;
+        
+         if(numberOfImage > this.state.srcs.length-1){
+             numberOfImage=0;
+         }
+         this.setState({numOfImage:numberOfImage})
+ 
+         document.getElementById('slideImage').src = this.state.srcs[numberOfImage];
+         document.getElementById('slideImage').alt = numberOfImage;
+ 
+
+
     }
     render() {
-        
-  
+
+      
         return <div className={mystyle.personalProfile}>
-            <div id="item1" className={mystyle.item1}>
-                <h1> Image here</h1>
-            </div>
-            <div id="item2" className={mystyle.item2}>
-                <h1> Persona Information here</h1>
-                <p>{this.state.personID}</p>
-                <div id="bar" className={mystyle.bar}>
-                    <div id="control" className={mystyle.control} onMouseDown={() => this.moveButton()}
-                        onMouseUp={() => this.removebarlistner()} ></div>
+            <div className={mystyle.top}>
+                <div id="item1" className={mystyle.item1}>
+                    <h1> Image here</h1>
                 </div>
-                <div id="percent"></div>
+                <div id="item2" className={mystyle.item2}>
+                    <h1> Persona Information here</h1>
+                    <p>{this.state.personID}</p>
+                    <div id="bar" className={mystyle.bar}>
+                        <div id="control" className={mystyle.control} onMouseDown={() => this.moveButton()}
+                            onMouseUp={() => this.removebarlistner()} ></div>
+                    </div>
+                    <div id="percent"></div>
 
 
+                </div>
             </div>
             <div id="item3" className={mystyle.item3}>
-            <Slider srcs={this.state.srcs} prev={()=>this.prev()}
-                    next={()=>this.next()}
-                    imageslide={this.state.imageslide}></Slider>
-         
-               
+                <Slider showmodalImage={(e)=>this.showmodalImage(e)} 
+                        srcs={this.state.srcs} 
+                        prev={() => this.prev()}
+                        next={() => this.next()}
+                        numOfImage={this.state.numOfImage}
+                        closebackkdrop={(e)=>this.closebackkdrop(e)}></Slider>
+
+
 
             </div>
 
             <div id="item4" className={mystyle.item4}>
-             
-                <Slidein srcs = {this.state.srcs}
-                         prev={()=>this.prev()}
-                         next={()=>this.next()}></Slidein>
+
+
 
 
             </div>

@@ -1,36 +1,54 @@
 .personalProfile{
-    display: grid;
-    grid-template-areas: 'auto auto auto auto auto auto auto auto auto auto';
-    grid-gap: 10px;
+    
     padding: 10px;
     width: 80%;
-    min-height: 1500px;
+    height: 1800px;
     margin: auto;
 }
+
 .personalProfile>div{
+    
+    display: block;
+    margin: 1%;
+    width: 100%;
+}
+
+.top{
+    height: 180px;
+}
+.top::after{
+    clear: both;
+    content:"";
+    
+}
+.item1{
+    width: 33%;
+    height: 100%;
+    float: left;
+  
+    background-color:rgb(226, 253, 244);
+    }
+
+.item2{
+    width: 66%;
+    height: 100%;
+    float: right;
     background-color:rgb(226, 253, 244);
 }
 
-.item1{
-    grid-area: 1/1/3/4;
-    }
-.item2{
-    grid-area: 1/4/3/11;
-   
-
-}
 .item3{
-    grid-area: 3/1/8/11;
-    height: auto;
-
+    width: 100%;
+    max-height: 280px;
+    position: relative;
+ 
 
 }
 
 .item4{
-    grid-area: 8/1/13/11;
-    height: auto;
-    position: relative;
-   
+    width: 100%;
+    height: 500px;
+    background-color:rgb(226, 253, 244);
+ 
 }
 .bar{
     width: 500px;
