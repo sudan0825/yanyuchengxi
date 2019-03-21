@@ -75,7 +75,7 @@ class Activities extends Component {
         row = document.getElementById("activitytable").getElementsByTagName("tr");
         this.setState({
             timer: setTimeout(function () {
-                
+
                 for (i = 1; i < row.length; i++) {
                     name = row[i].getElementsByTagName('td')[0];
                     city = row[i].getElementsByTagName('td')[2];
@@ -97,29 +97,29 @@ class Activities extends Component {
     sorttable(e) {
 
         let n = this.state.th.indexOf(e.target.innerText.trim());
- 
+
         let tabledata = this.state.td.slice();
         let sequence = this.state.ascending;
 
         if (sequence) {
-            if(n === 4){
-                tabledata.sort((a, b) => a[n]-b[n])
+            if (n === 4) {
+                tabledata.sort((a, b) => a[n] - b[n])
 
-            }else{
+            } else {
                 tabledata.sort((a, b) => (a[n] + "").trim().localeCompare((b[n] + "").trim()))
 
             }
 
-            
-        } else {
-            if(n === 4){
-                tabledata.sort((a, b) => b[n]-a[n])
 
-            }else{
-                tabledata.sort((a, b) => (b[n] + "").trim().localeCompare((a[n]+ "").trim() ))
+        } else {
+            if (n === 4) {
+                tabledata.sort((a, b) => b[n] - a[n])
+
+            } else {
+                tabledata.sort((a, b) => (b[n] + "").trim().localeCompare((a[n] + "").trim()))
 
             }
-            
+
         }
         this.setState({ td: tabledata, ascending: !sequence })
     }
@@ -127,10 +127,11 @@ class Activities extends Component {
 
     }
     addNewEvent() {
+
         this.setState({ showCurtain: true })
     }
     hideCurtain(e) {
-     
+
         if (e.currentTarget === e.target) {
             this.setState({ showCurtain: false })
         }
@@ -144,6 +145,7 @@ class Activities extends Component {
         this.setState({ showCurtain: false })
     }
     render() {
+        console.log(this.state.showCurtain)
 
         let ths = this.state.th.map((head) => {
             return <th columnname={head} key={head}>{head}</th>
@@ -159,30 +161,31 @@ class Activities extends Component {
             eventDetails.push([i, this.state.newEvent[i]])
         }
         let newEvent = (
-            <div>
-                <div>
-                    <form>
-                        <h2>New Activities</h2>
-                        {eventDetails.map((eventDetail) => {
-                            return <Input key={eventDetail[0]}
-                                elemType={eventDetail[1].elemType}
-                                elemConfig={eventDetail[1].elemConfig}
-                                label={eventDetail[1].label ? eventDetail[1].label : eventDetail[0]}
-                                from={'activity'}
-                                changed={this.inputchangeHandler}>
-                            </Input>
+            <div className={mystyle.backcurtain}>
 
-                        })}
+                <form>
+                    <h2>New Activities</h2>
+                    {eventDetails.map((eventDetail) => {
+                        return <Input key={eventDetail[0]}
+                            elemType={eventDetail[1].elemType}
+                            elemConfig={eventDetail[1].elemConfig}
+                            label={eventDetail[1].label ? eventDetail[1].label : eventDetail[0]}
+                            from={'activity'}
+                            changed={this.inputchangeHandler}>
+                        </Input>
 
-                    </form>
-                </div>
+                    })}
+
+                </form>
+
                 <div>
                     <Submitandcancel submit={() => this.submit()}
                         cancel={() => this.cancel()}></Submitandcancel>
                 </div>
             </div>)
+        console.log(newEvent)
         return (<div>
-            {this.state.showCurtain ? <Backcurtain click={(e) => this.hideCurtain(e)}>
+            {this.state.showCurtain ? <Backcurtain  click={(e) => this.hideCurtain(e)}>
                 {newEvent}
             </Backcurtain> : null}
 

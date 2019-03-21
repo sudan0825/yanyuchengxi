@@ -99,8 +99,7 @@ class Personalprofile extends Component {
             numberOfImage=this.state.srcs.length-1;
         }
         this.setState({numOfImage:numberOfImage})
-        document.getElementById('slideImage').src = this.state.srcs[numberOfImage];
-        document.getElementById('slideImage').alt = numberOfImage;
+    
 
 
     }
@@ -113,10 +112,6 @@ class Personalprofile extends Component {
              numberOfImage=0;
          }
          this.setState({numOfImage:numberOfImage})
- 
-         document.getElementById('slideImage').src = this.state.srcs[numberOfImage];
-         document.getElementById('slideImage').alt = numberOfImage;
- 
 
 
     }

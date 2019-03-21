@@ -26,17 +26,25 @@
 
 }
 .slideImage{
-    width: 100%;
+    width: 35%;
     height: auto;
+    position: absolute;
+    top: 50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    border:6px ridge rgb(50, 67, 88);
+    border-radius: 15px;
 }
+
 .prev,.next{
     position: absolute;
-    top:40%;
+    top:50%;
+    transform: translateY(-50%);
     font-weight: bold;
     font-size: 26px;
     user-select: none;
     -webkit-user-select: none;
-    z-index: 5;
+    z-index: 7;
     cursor: pointer;
   
 
@@ -49,4 +57,11 @@
 }
 
 
-
+#test{
+    position: fixed;
+    top: 10px;
+    left:10px;
+    width: 300px;
+    height: 300px;
+    background-color: aliceblue;
+}

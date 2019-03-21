@@ -8,3 +8,50 @@
     text-align: left;
     
 }
+.backgroundimg1, .backgroundimg2, .backgroundimg3{
+  position: relative;
+  opacity: 0.65;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.text{
+    position: relative;
+}
+
+.backgroundimg1{
+    background-image: url('../../assets/heart.jpeg');
+    min-height: 500px;
+}
+.backgroundimg2{
+    background-image: url('../../assets/couple.jpg');
+    min-height: 300px;
+}
+.backgroundimg3{
+    background-image: url('../../assets/hand.jpg');
+    min-height: 300px;
+}
+
+.caption {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
+    color: #000;
+  }
+  
+  .caption span.border {
+  
+    font-size: 25px;
+    letter-spacing: 10px;
+    color: rgb(75, 71, 71);
+    background-color:white;
+    text-align:center;
+    padding:10px 30px;
+    text-align: justify;
+  }
+  
