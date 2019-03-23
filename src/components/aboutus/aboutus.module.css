@@ -19,6 +19,10 @@
 }
 .text{
     position: relative;
+    
+}
+.text>p{
+    text-align: left;
 }
 
 .backgroundimg1{

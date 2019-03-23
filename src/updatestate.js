@@ -1,4 +1,4 @@
-export const update = (nextprop, prestate)=>{
+export const updateState = (nextprop, prestate)=>{
     return {...nextprop, ...prestate}
 }
 

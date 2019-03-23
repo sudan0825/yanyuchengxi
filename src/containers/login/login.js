@@ -3,6 +3,14 @@ import mystyle from './login.module.css';
 import Input from '../../UIs/input';
 import Submitandcancel from '../../UIs/submitandcancelbutton';
 
+import { Link } from 'react-router-dom';
+
+//connect to redux
+import { connect } from 'react-redux';
+import * as action from '../../store/actions/auth';
+import { Redirect } from 'react-router-dom'
+
+
 class Login extends Component {
 
     state = {
@@ -20,8 +28,9 @@ class Login extends Component {
                     email: true
                 },
                 class: 'inputUI',
-                valid: false,
-                touched: false
+                
+                touched: false,
+
             },
 
             Password: {
@@ -38,15 +47,67 @@ class Login extends Component {
 
                 },
                 class: 'inputUI',
-                valid: false,
-                touched: false
+                
+                touched: false,
+
+            },
+
+        },
+        err: ""
+
+    }
+  
+    submit(e) {
+        
+        e.preventDefault();
+        let name = this.state.user.Username.value;
+        let pw = this.state.user.Password.value;
+
+        if (!this.chechValidity(name, this.state.user.Username.validation)) {
+            let err = 'please input a valid Username value ';
+            this.setState({ err: err })
+        }else if (!this.chechValidity(pw, this.state.user.Password.validation)) {
+            let err = 'please input a valid Password value ';
+            this.setState({ err: err })
+        }else{
+           this.props.auth({username:name, password:pw})
+        } 
+    }
+   cancel(){
+       let user = this.state.user;
+       for(let elem in user){
+           user[elem].value=''
+       }
+       this.setState({user:user})
+   }
+    chechValidity = (value, rules) => {
+        if (!rules) return true;
+        let isValid = true;
+        if (rules.required) {
+            isValid = value.trim() !== '' && isValid;
+        }
+        if (rules.minLength) {
+            isValid = (value.trim().length >= rules.minLength) && isValid;
+        }
+       
+
+        return isValid;
+    }
+    inputchangeHandler(e, elem) {
+
+        if (this.props.error) {
+            this.props.deleteError();
+        }
+        const updateState = {
+            ...this.state.user,
+            [elem]: {
+                ...this.state.user[elem],
+                value: e.target.value,
+                touched: true
             }
         }
 
-    }
-
-
-    inputchangeHandler() {
+        this.setState({ user: updateState });
 
     }
     render() {
@@ -64,26 +125,46 @@ class Login extends Component {
                 label={elem}
                 class={user[elem].class}
                 from='login'
-                changed={this.inputchangeHandler}>
+                changed={(e) => this.inputchangeHandler(e, elem)}>
             </Input>)
 
         }
 
 
         return (<div className={mystyle.loginpage}>
-            <form>
-                <fieldset>
-                    <legend>Log in</legend>
-                    <h1>The UI is for demo. Please click on cancle to visit the website</h1>
-                    {formfield}
-                    
-                </fieldset>
+            {this.props.isAutheticated? <Redirect to = {this.props.authRedirectPath}/>:null}
+            <form > 
+                <h1>Log in</h1>
+
+                {formfield}
+                {this.state.err ? <div id="errorInput">{this.state.err}</div> : null}
+                {this.props.error?<div id="errorInput">{this.props.error}</div> : null}
+                <Submitandcancel submit={(e)=>this.submit(e)} cancel={()=>this.cancel()}></Submitandcancel>
+                <Link to="profile">New User? Please click here to regist</Link>
 
             </form>
-            <Submitandcancel submit={this.props.submit} cancel={this.props.cancel}></Submitandcancel>
+
 
         </div>)
     }
 }
 
-export default Login;
+const mapStateToProps = state => {
+
+    return {
+
+        error: state.authReducer.error,
+        isAutheticated: state.authReducer.isAuthed,
+        authRedirectPath: state.authReducer.redirecPath
+
+    }
+}
+
+const mapActionToProps = dispatch => {
+    return {
+        auth: (data) => dispatch(action.auth(data)),
+        deleteError: () => dispatch(action.deleteError())
+
+    }
+}
+export default connect(mapStateToProps, mapActionToProps)(Login);

@@ -86,6 +86,7 @@ const input = (props) => {
             <label >{props.label}
                 <br></br>
                 {inputElement}
+                
             </label>
 
         </div>

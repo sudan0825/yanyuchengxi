@@ -29,10 +29,10 @@ const Aboutus = (props) => {
 
         </div>
         <div className={mystyle.text}>
-            <p>The bellow messages is copied from ** for placeholder. Can you guess where it from</p>
-            <p>Yanyuchengxi is an online dating service with web sites serving ** countries
-                in more than ** languages. Its headquarters are in Sunnyvale, CA. The company
-             has offices in *, *, *. Yanyuchengxi is owned by myself. </p>
+            <p>Life is hard if you handle everything by yourself. Find the one who stands for you when you 
+                tired; Find the one who you want to shield. Life is short. We should try out best to live the way we want to live. 
+                Don't afraid hurt. It always accompany by happiness. That makes a life colorful. </p>
+            <p> </p>
         </div>
 
         <div className={mystyle.backgroundimg3}>

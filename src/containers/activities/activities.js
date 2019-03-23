@@ -145,7 +145,7 @@ class Activities extends Component {
         this.setState({ showCurtain: false })
     }
     render() {
-        console.log(this.state.showCurtain)
+       
 
         let ths = this.state.th.map((head) => {
             return <th columnname={head} key={head}>{head}</th>
@@ -183,7 +183,7 @@ class Activities extends Component {
                         cancel={() => this.cancel()}></Submitandcancel>
                 </div>
             </div>)
-        console.log(newEvent)
+       
         return (<div>
             {this.state.showCurtain ? <Backcurtain  click={(e) => this.hideCurtain(e)}>
                 {newEvent}

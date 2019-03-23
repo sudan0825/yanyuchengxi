@@ -10,8 +10,8 @@ class Personalprofile extends Component {
     state = {
         personID: '',
         images: [],
-        srcs: [require('../../../assets/1.JPG'), require('../../../assets/2.JPG'), require('../../../assets/3.JPG'),
-        require('../../../assets/4.JPG'), require('../../../assets/5.JPG')],
+        srcs: [require('../../../assets/couple.jpg'), require('../../../assets/hand.jpg'), require('../../../assets/heart.jpeg'),
+        require('../../../assets/c1.jpg'),require('../../../assets/c2.jpg')],
         imageslide: false,
         numOfImage:null
 

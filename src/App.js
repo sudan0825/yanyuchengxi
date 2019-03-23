@@ -8,12 +8,16 @@ import Aboutus from './components/aboutus/aboutus';
 import Login from './containers/login/login';
 import Profile from './containers/login/profile';
 import Personalprofile from './containers/home/PersonalProfile/Personalprofile';
-import Backcurtain from './UIs/backcurtain';
+import * as action from './store/actions/auth';
+
+//connect to redux
+import { connect } from 'react-redux';
+
 
 class App extends Component {
   state = {
     loggedin: true,
-    isLogIn: true
+  
   }
 
 componentDidMount(){
@@ -72,7 +76,7 @@ onwindowscroll(){
   }
   render() {
     return (<BrowserRouter>
-      {this.state.isLogIn ?<div className="App"  >
+     <div className="App"  >
 
         <header className="App-header">
           <p id="logo"><Link to="home">有我的日子，你不在孤单</Link></p>
@@ -80,7 +84,8 @@ onwindowscroll(){
             <NavList />
           </nav>
           <div className="logandsign">
-            <Link to="profile">Sign Up</Link>
+            {this.props.isAutheticated?null:<Link to="login">Log in</Link>}
+            <Link onClick={this.props.logout} to="/">Log out</Link>
           </div>
         </header>
         <main>
@@ -89,13 +94,26 @@ onwindowscroll(){
         <footer>
 
         </footer>
-      </div> :<Backcurtain><Login cancel={()=>this.cancel()} 
-                                  submit={()=>this.submit()}></Login></Backcurtain>  }
-
-
+      </div> 
     </BrowserRouter>
     );
   }
 }
+const mapStateToProps = state => {
 
-export default App;
+  return {
+
+      isAutheticated: state.authReducer.isAuthed
+    
+
+  }
+}
+
+const mapActionToProps = dispatch => {
+  return {
+      logout: () => dispatch(action.logout()),
+     
+
+  }
+}
+export default connect(mapStateToProps, mapActionToProps)(App);

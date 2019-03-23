@@ -2,10 +2,6 @@
   text-align: center;
   color: rgb(51, 49, 49);
   background-color: rgb(252, 253, 248);
- 
-
-  
-
 }
 
 .App-header {
@@ -55,6 +51,7 @@
   border-radius: 6px;
   border: 2px solid  rgb(17, 66, 68);
   color: aliceblue;
+  margin: 0 15px
   
 }
 nav{
@@ -69,7 +66,9 @@ main{
   top:160px;
   position: relative;
 
-
+}
+#errorInput{
+  color: red;
 }
 @media Screen and (max-width:500px){
  

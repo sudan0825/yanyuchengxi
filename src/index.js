@@ -3,12 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import authReducer from './store/reducers/auth'
 
 
 //firebase configuration
 import firebase from "firebase/app";
 import 'firebase/database';
 import 'firebase/storage';
+import 'firebase/auth'
 import fbconfig from './config/firebase';
 
 //redux configuration
@@ -22,13 +24,23 @@ firebase.initializeApp(fbconfig);
 //connect to redux store
 //enable to use redux DevTools
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const logger = store =>{
+    return next => {
+        return action =>{
+            console.log('[middleware] dispathing', action);
+            const result = next(action);
+            console.log('[middleware next state', store.getState());
+            return result
+        }
+    }
+}
 //combine reducer
 const rootReducer = combineReducers({
-    
+    authReducer:authReducer
 })
 //create store
 const store = createStore(rootReducer, composeEnhancers(
-    applyMiddleware(thunk)
+    applyMiddleware(thunk, logger)
 ));
 
 

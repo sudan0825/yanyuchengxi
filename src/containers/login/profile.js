@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import Input from '../../UIs/input';
 import Submitandcancel from '../../UIs/submitandcancelbutton';
-import mystyle from './login.module.css'
+import mystyle from './login.module.css';
+
+//connect to redux
+
+import { connect } from 'react-redux';
+import * as action from '../../store/actions/auth';
+
 
 class Profile extends Component {
     state = {
@@ -174,5 +180,21 @@ class Profile extends Component {
         )
     }
 }
+const mapStateToProps=state=>{
 
-export default Profile;
+    return{
+
+        error:state.authReducer.error,
+        isAutheticated:state.authReducer.isAuthed,
+        authRedirectPath:state.authReducer.redirecPath
+
+    }
+}
+
+const mapActionToProps=dispatch=>{
+    return {
+        auth:(data)=>dispatch(action.auth(data)),
+       
+    }
+}
+export default connect(mapStateToProps, mapActionToProps) (Profile);

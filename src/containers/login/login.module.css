@@ -62,3 +62,6 @@ label{
     font-size: 26px;
     font-weight: bolder;
 }
+form{
+    padding: 15px 0 30px;
+}
