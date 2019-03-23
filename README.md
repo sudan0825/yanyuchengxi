@@ -14,3 +14,5 @@ Features till today:
 5. Hosting web application on Firebase
 6. Use Firebase authentication function
 7. Use Firenbase database function 
+8. Finish most of UIs implementation. When a custom profile is clicked, his/her information will be displayed in profile detail page
+
