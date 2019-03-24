@@ -3,6 +3,7 @@ import Backcurtain from '../../UIs/backcurtain';
 import Input from '../../UIs/input';
 import mystyle from './activities.module.css';
 import Submitandcancel from '../../UIs/submitandcancelbutton';
+import axios from '../../axios'
 
 
 
@@ -26,6 +27,10 @@ class Activities extends Component {
                     type: 'string',
                     placeholder: "Please input an event name"
                 },
+                validation: {
+                    required: true,
+                },
+                value:'',
                 label: 'Event Name',
             },
             Date: {
@@ -34,6 +39,10 @@ class Activities extends Component {
                     type: 'date',
                     placeholder: "Please input an event name"
                 },
+                validation: {
+                    required: true,
+                },
+                value:'',
 
             },
             City: {
@@ -42,6 +51,10 @@ class Activities extends Component {
                     type: 'string',
                     placeholder: "Please input an event name"
                 },
+                validation: {
+                    required: true,
+                },
+                value:'',
 
             },
             Zip: {
@@ -50,6 +63,10 @@ class Activities extends Component {
                     type: 'string',
                     placeholder: "Please input an event name"
                 },
+                validation: {
+                    required: true,
+                },
+                value:'',
 
             },
             Participants: {
@@ -58,6 +75,10 @@ class Activities extends Component {
                     type: 'number',
                     placeholder: "Please input an event name"
                 },
+                validation: {
+                    required: true,
+                },
+                value:'',
 
             },
 
@@ -123,7 +144,30 @@ class Activities extends Component {
         }
         this.setState({ td: tabledata, ascending: !sequence })
     }
-    inputchangeHandler() {
+    chechValidity = (value, rules) => {
+        if (!rules) return true;
+        let isValid = true;
+        if (rules.required) {
+            isValid = value.trim() !== '' && isValid;
+        }
+        if (rules.minLength) {
+            isValid = (value.trim().length >= rules.minLength) && isValid;
+        }
+        return isValid;
+    }
+    inputchangeHandler(e,elem) {
+
+        const updateState = {
+            ...this.state.newEvent,
+            [elem]: {
+                ...this.state.newEvent[elem],
+                value: e.target.value,
+                touched: true
+            }
+        }
+
+        this.setState({ newEvent: updateState });
+     
 
     }
     addNewEvent() {
@@ -137,12 +181,31 @@ class Activities extends Component {
         }
 
     }
-    cancel() {
-        this.setState({ showCurtain: false })
+    cancel(e) {
+        e.preventDefault();
+        let clearObj = {...this.state.newEvent};
+        for(let elem in clearObj){
+           
+            clearObj[elem].value = ''
+        }
+       this.setState({newEvent:clearObj}, ()=>{
+           console.log(this.state.newEvent)
+       })
 
     }
-    submit() {
-        this.setState({ showCurtain: false })
+    submit(e) {
+
+        e.preventDefault();
+
+        axios.post('/event.json',this.state.newEvent)
+        .then((res)=>{
+            console.log(res)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+     
+       
     }
     render() {
        
@@ -170,18 +233,18 @@ class Activities extends Component {
                             elemType={eventDetail[1].elemType}
                             elemConfig={eventDetail[1].elemConfig}
                             label={eventDetail[1].label ? eventDetail[1].label : eventDetail[0]}
+                            value = {eventDetail[1].value}
                             from={'activity'}
-                            changed={this.inputchangeHandler}>
+                            changed={(e)=>this.inputchangeHandler(e,eventDetail[0])}>
                         </Input>
 
                     })}
+                    <Submitandcancel submit={(e) => this.submit(e)}
+                        cancel={(e) => this.cancel(e)}></Submitandcancel>
 
                 </form>
 
-                <div>
-                    <Submitandcancel submit={() => this.submit()}
-                        cancel={() => this.cancel()}></Submitandcancel>
-                </div>
+                
             </div>)
        
         return (<div>

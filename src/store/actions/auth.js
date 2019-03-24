@@ -1,20 +1,22 @@
 import * as actionTypes from './actionType';
 
-import firebase from "firebase/app";
-import 'firebase/auth';
 
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 
 
 export const authStart = () => {
     return {
-        type: actionTypes.AUTH_START
+        type: actionTypes.AUTH_START,
+       
     };
 }
 
-export const authSuccess = () => {
+export const authSuccess = (data) => {
     return {
-        type: actionTypes.AUTH_SUCCESS
+        type: actionTypes.AUTH_SUCCESS,
+        data:data
     }
 }
 
@@ -33,13 +35,17 @@ export const deleteError = () => {
 }
 
 export const logout = () => {
-    firebase.auth().signOut().then(function () {
-    }).catch(function (error) {
-        console.log("cannot log out")
-    });
     return {
         type: actionTypes.LOGOUT_SUCCESS
 
+    }
+}
+
+
+export const setRedirectPath = (path) => {
+    return {
+        type: actionTypes.SET_REDIRECT_PATH,
+        path: path
     }
 }
 const setSessionPersistence = () => {
@@ -66,11 +72,14 @@ export const auth = (data) => {
 
         dispatch(authStart());
         if (authData.isSignUp) {
-            return firebase.auth().createUserWithEmailAndPassword(authData.username, authData.password)
+            return firebase.auth().createUserWithEmailAndPassword(authData.Username, authData.Password)
                 .then(res => {
-                    console.log(res);
+                    console.log('sign up')
                     setSessionPersistence();
-                    dispatch(authSuccess());
+                    dispatch(authSuccess(authData));
+                    
+
+                    
                 })
                 .catch((err) => {
                     let code = err.code;
@@ -85,7 +94,7 @@ export const auth = (data) => {
         } else {
             return firebase.auth().signInWithEmailAndPassword(authData.username, authData.password)
                 .then(res => {
-                    console.log(res);
+                   
                     setSessionPersistence()
                     dispatch(authSuccess());
                 })
@@ -104,11 +113,3 @@ export const auth = (data) => {
         }
     }
 }
-
-export const setRedirectPath = (path) => {
-    return {
-        type: actionTypes.SET_REDIRECT_PATH,
-        path: path
-    }
-}
-

@@ -1,13 +1,17 @@
 import * as actionTypes from '../actions/actionType';
 import { updateState } from '../../updatestate';
 
+import firebase from "firebase/app";
+import 'firebase/auth';
+import 'firebase/firestore'
+import axios from '../../axios';
+
+
 const initialState = {
-    email: '',
-    idToken: '',
-    isAuthed: false,
-    error: '',
-    loading: false,
-    redirecPath: '/'
+    isAuthed:false,
+    error:'',
+    loading:false,
+    redirecPath:'/'
 }
 const authStart = (state, action) => {
    
@@ -15,6 +19,16 @@ const authStart = (state, action) => {
 };
 
 const authSuccess = (state, action) => {
+  
+    axios.post('/userInfo.json',action.data)
+                        .then((res)=>{
+                            console.log('success')
+                            console.log(res)
+                        })
+                        .catch(err=>{
+                            console.log('fail')
+                            console.log(err)
+                        })
 
     return updateState(state, {
         redirecPath: '/',
@@ -23,6 +37,7 @@ const authSuccess = (state, action) => {
 };
 
 const authFail = (state, action) => {
+    
 
     return updateState(state, {
         error: action.error,
@@ -31,6 +46,10 @@ const authFail = (state, action) => {
 };
 
 const logout = (state, action) => {
+    firebase.auth().signOut().then(function () {
+    }).catch(function (error) {
+        console.log("cannot log out")
+    });
     return updateState(state, { isAuthed: false });
 };
 
@@ -43,6 +62,7 @@ const setRedirectPath = (state, action) => {
     return updateState(state, { redirecPath: action.path })
 
 }
+
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.AUTH_START: return authStart(state, action);

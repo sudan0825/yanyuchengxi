@@ -8,9 +8,8 @@ import authReducer from './store/reducers/auth'
 
 //firebase configuration
 import firebase from "firebase/app";
-import 'firebase/database';
-import 'firebase/storage';
-import 'firebase/auth'
+
+
 import fbconfig from './config/firebase';
 
 //redux configuration
@@ -20,10 +19,13 @@ import thunk from 'redux-thunk'
 
 // Initialize Firebase
 
-firebase.initializeApp(fbconfig);
+ firebase.initializeApp(fbconfig);
+
+
 //connect to redux store
 //enable to use redux DevTools
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//log the steps to console
 const logger = store =>{
     return next => {
         return action =>{
