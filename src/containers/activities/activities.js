@@ -14,7 +14,7 @@ import { sortObjectByProperty } from '../../sortObjectByProperty'
 class Activities extends Component {
 
     state = {
-        th: ["Activity/Event name", "Date", "Place/City", "Zip", "Participants"],
+        th: ["Activity/Event name", "Date", "Place/City", "Zip", "Accommodaties", "Participants"],
         td: [],
 
         ascending: false,
@@ -140,7 +140,7 @@ class Activities extends Component {
    //sort table content by the clicked column name 
     sorttable(e) {
 
-        let heads = ["Eventname", "Date", "City", "Zip", "Participants"];
+        let heads = ["Eventname", "Date", "City", "Zip", "Accommodaties", "Participants"];
         let index = this.state.th.indexOf(e.target.innerText.trim())
         let sequence = this.state.ascending;
         this.setState({ td: sortObjectByProperty(this.state.td,heads[index], sequence,index),
@@ -244,20 +244,31 @@ class Activities extends Component {
 
     prepareTableContent(){
         let map = new Map();
-        let heads = ["Eventname", "Date", "City", "Zip", "Participants"];
+        let heads = ["Eventname", "Date", "City", "Zip", "Accommodaties","Participants"];
         let tds = [];
         tds = this.state.td.map((record)=>{
+            let participant = 0, accommodaties = 0;
             for(let d in record[1]){
+                if(d === "Accommodaties"){
+                    accommodaties = record[1][d]
+                }
+                if(d === "Participants"){
+                    participant = record[1][d]
+                }
                 map.set(d,record[1][d]);
+            }
+            let moreParticipantAlert = false
+            if(participant > accommodaties){
+                console.log("participant more than commodation");
+                moreParticipantAlert = true
             }
             let tdata = heads.map(head=>{
                 return <td  key={head}>{map.get(head)}</td>
             })
             return (<tr key={record} 
-                        className={mystyle.datarow}
+                        className={moreParticipantAlert?[mystyle.datarow, mystyle.moreParticipantAlert].join(' '):mystyle.datarow}
                         onFocus={(e)=>this.changeEventDetail(e)}
-                        contentEditable
-                        suppressContentEditableWarning>{tdata}</tr>)
+                        >{tdata}</tr>)
                 
         })
         return tds;

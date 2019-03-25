@@ -36,6 +36,7 @@
 .activitytable{
     width: 80%;
     margin: auto;
+   
 }
 .activitytable th{
     font-size: 18px;
@@ -67,5 +68,10 @@ caption{
 .activitytable  .datarow:hover{
     background-color: orange;
     cursor: pointer;
+ 
 
+}
+
+.moreParticipantAlert{
+    color: red
 }
