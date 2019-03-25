@@ -90,24 +90,13 @@ class Activities extends Component {
        
         axios.get('/event.json')
              .then((res)=>{
-                console.log(sortObjectByProperty(res.data,'Eventname', 'ascending'))
                  this.setState({td:sortObjectByProperty(res.data,'Eventname', 'ascending')})
              })
              .catch((err)=>{
                  console.log(err)
              })
-
     }
-    componentWillMount(){
-        console.log("componentWillMount")
-    }
-    componentWillUpdate(){
-        console.log("componentWillUpdate")
-    }
-    componentDidUpdate(){
-        console.log("componentDidUpdate")
-    }
-
+  
     //seach an event by it's place or name
     search() {
 
@@ -146,7 +135,7 @@ class Activities extends Component {
         this.setState({ td: sortObjectByProperty(this.state.td,heads[index], sequence,index),
                         ascending: !sequence })
     }
-    addNewEvent() {
+    showCurtain() {
 
         this.setState({ showCurtain: true })
     }
@@ -215,12 +204,16 @@ class Activities extends Component {
         console.log(data)
         axios.post('/event.json',data)
         .then((res)=>{
-            console.log(res)
+            let oldState=[...this.state.td];
+            oldState.push([res.data.name,data])
+            console.log(oldState);
+            this.setState({td:oldState})
         })
         .catch((err)=>{
             console.log(err)
         })
-        this.cancel(e)
+        this.cancel(e);
+      
         this.setState({ showCurtain: false })
      
        
@@ -300,7 +293,7 @@ class Activities extends Component {
                 {newEvent}
             </Backcurtain> : null}
 
-            <div id={mystyle.plussign} onClick={() => this.addNewEvent()}>
+            <div id={mystyle.plussign} onClick={() => this.showCurtain()}>
                 <img src={require('../../assets/plus-sign.jpg')}
                     alt="plussign" title="Add New Activities"></img>
                 <p>Add New Activities</p>

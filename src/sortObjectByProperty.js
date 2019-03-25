@@ -19,7 +19,7 @@ export const sortObjectByProperty = (obj,prop,seq, index)=>{
             if(index<3){
                 return n[1][prop].localeCompare(m[1][prop])
             }
-            console.log(m[1][prop],n[1][prop])
+            
             return n[1][prop]-m[1][prop]
         })
 
