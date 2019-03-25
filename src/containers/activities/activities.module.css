@@ -54,7 +54,7 @@
     border: ridge 3px rgb(219, 208, 208);
     border-collapse:collapse;
 }
-.activitytable tr:nth-child(even){
+.activitytable .datarow:nth-child(even){
     background-color: rgb(231, 231, 250);
 }
 
@@ -63,4 +63,9 @@ caption{
     font-weight: bold;
     margin-bottom: 26px;
     
+}
+.activitytable  .datarow:hover{
+    background-color: orange;
+    cursor: pointer;
+
 }

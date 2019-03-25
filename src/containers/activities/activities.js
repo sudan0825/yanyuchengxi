@@ -3,22 +3,19 @@ import Backcurtain from '../../UIs/backcurtain';
 import Input from '../../UIs/input';
 import mystyle from './activities.module.css';
 import Submitandcancel from '../../UIs/submitandcancelbutton';
-import axios from '../../axios'
+import axios from '../../axios';
+
+import { sortObjectByProperty } from '../../sortObjectByProperty'
 
 
 
 class Activities extends Component {
 
     state = {
-        th: ["Activity/Event name", "Date", "City", "Zip", "Participants"],
-        td: [["Grocery Shopping", "05/06/2019", "Sunnyvale", "94086", 10],
-        ["Drawing Class", "03/30/2019", "Santa Clara", "95051", 31],
-        ["10 miles Hiking", "04/03/2019", "Mountain view", " 95003", 18],
-        ["15 miles Hiking", "04/20/2019", "Sunnyvale", "94087", 20],
-        ["Cooking class with Chef", "09/12/2019", "Cupertino", "94028", 30],
-        ["Video Game together", "12/31/2019", "Fremont", "93048", 10]],
+        th: ["Activity/Event name", "Date", "Place/City", "Zip", "Participants"],
+        td: [],
 
-        ascending: true,
+        ascending: false,
         timer: null,
         newEvent: {
             Eventname: {
@@ -31,7 +28,7 @@ class Activities extends Component {
                     required: true,
                 },
                 value:'',
-                label: 'Event Name',
+                label: 'Activity/Event name',
             },
             Date: {
                 elemType: 'input',
@@ -55,6 +52,7 @@ class Activities extends Component {
                     required: true,
                 },
                 value:'',
+                label:'City/Place'
 
             },
             Zip: {
@@ -83,9 +81,34 @@ class Activities extends Component {
             },
 
         },
-        showCurtain: false
+        showCurtain: false,
+        err:""
 
     }
+    componentDidMount(){
+        console.log("componentDidMount");
+       
+        axios.get('/event.json')
+             .then((res)=>{
+                console.log(sortObjectByProperty(res.data,'Eventname', 'ascending'))
+                 this.setState({td:sortObjectByProperty(res.data,'Eventname', 'ascending')})
+             })
+             .catch((err)=>{
+                 console.log(err)
+             })
+
+    }
+    componentWillMount(){
+        console.log("componentWillMount")
+    }
+    componentWillUpdate(){
+        console.log("componentWillUpdate")
+    }
+    componentDidUpdate(){
+        console.log("componentDidUpdate")
+    }
+
+    //seach an event by it's place or name
     search() {
 
         let filter, row, namedata, citydata, i, name, city;
@@ -114,36 +137,20 @@ class Activities extends Component {
             }, 300)
         })
     }
-
+   //sort table content by the clicked column name 
     sorttable(e) {
 
-        let n = this.state.th.indexOf(e.target.innerText.trim());
-
-        let tabledata = this.state.td.slice();
+        let heads = ["Eventname", "Date", "City", "Zip", "Participants"];
+        let index = this.state.th.indexOf(e.target.innerText.trim())
         let sequence = this.state.ascending;
-
-        if (sequence) {
-            if (n === 4) {
-                tabledata.sort((a, b) => a[n] - b[n])
-
-            } else {
-                tabledata.sort((a, b) => (a[n] + "").trim().localeCompare((b[n] + "").trim()))
-
-            }
-
-
-        } else {
-            if (n === 4) {
-                tabledata.sort((a, b) => b[n] - a[n])
-
-            } else {
-                tabledata.sort((a, b) => (b[n] + "").trim().localeCompare((a[n] + "").trim()))
-
-            }
-
-        }
-        this.setState({ td: tabledata, ascending: !sequence })
+        this.setState({ td: sortObjectByProperty(this.state.td,heads[index], sequence,index),
+                        ascending: !sequence })
     }
+    addNewEvent() {
+
+        this.setState({ showCurtain: true })
+    }
+    //check whether the input is valid or not
     chechValidity = (value, rules) => {
         if (!rules) return true;
         let isValid = true;
@@ -155,6 +162,7 @@ class Activities extends Component {
         }
         return isValid;
     }
+    //hand the new event input change
     inputchangeHandler(e,elem) {
 
         const updateState = {
@@ -167,13 +175,8 @@ class Activities extends Component {
         }
 
         this.setState({ newEvent: updateState });
-     
-
     }
-    addNewEvent() {
-
-        this.setState({ showCurtain: true })
-    }
+    //if click on the background, hide the drop back curtain
     hideCurtain(e) {
 
         if (e.currentTarget === e.target) {
@@ -181,6 +184,8 @@ class Activities extends Component {
         }
 
     }
+
+    //clear input event field
     cancel(e) {
         e.preventDefault();
         let clearObj = {...this.state.newEvent};
@@ -189,36 +194,79 @@ class Activities extends Component {
             clearObj[elem].value = ''
         }
        this.setState({newEvent:clearObj}, ()=>{
-           console.log(this.state.newEvent)
+         
        })
 
     }
+    //submit the new event
     submit(e) {
 
         e.preventDefault();
+        let data = {};
+       
+        for(let d in this.state.newEvent){
+            if(this.chechValidity(this.state.newEvent[d].value,this.state.newEvent[d].validation)){
+                let errormessage = "Please in put a valid "+d
+                this.setState({err:errormessage})
 
-        axios.post('/event.json',this.state.newEvent)
+            }
+            data[d]=this.state.newEvent[d].value
+        }
+        console.log(data)
+        axios.post('/event.json',data)
         .then((res)=>{
             console.log(res)
         })
         .catch((err)=>{
             console.log(err)
         })
+        this.cancel(e)
+        this.setState({ showCurtain: false })
      
        
     }
+
+    changeEventDetail(e){
+        e.target.addEventListener('blur',(e)=>this.printchange(e))
+   
+    }
+
+    printchange(e){
+        
+        console.log("call back", e.target);
+     
+    }
+    //print the table content to HTML
+
+    prepareTableContent(){
+        let map = new Map();
+        let heads = ["Eventname", "Date", "City", "Zip", "Participants"];
+        let tds = [];
+        tds = this.state.td.map((record)=>{
+            for(let d in record[1]){
+                map.set(d,record[1][d]);
+            }
+            let tdata = heads.map(head=>{
+                return <td  key={head}>{map.get(head)}</td>
+            })
+            return (<tr key={record} 
+                        className={mystyle.datarow}
+                        onFocus={(e)=>this.changeEventDetail(e)}
+                        contentEditable
+                        suppressContentEditableWarning>{tdata}</tr>)
+                
+        })
+        return tds;
+    }
     render() {
        
-
+        console.log("render")
         let ths = this.state.th.map((head) => {
             return <th columnname={head} key={head}>{head}</th>
-        })
-        let tds = this.state.td.map((tr, idx) => {
-            let datas = tr.map((d, i) => {
-                return <td data={d} key={d + i}>{d}</td>
-            })
-            return <tr key={idx + tr.join('')}>{datas}</tr>
-        })
+        });
+        let tds = [];
+        tds=this.prepareTableContent()
+        
         let eventDetails = [];
         for (let i in this.state.newEvent) {
             eventDetails.push([i, this.state.newEvent[i]])
