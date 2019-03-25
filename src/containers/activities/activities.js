@@ -5,6 +5,8 @@ import mystyle from './activities.module.css';
 import Submitandcancel from '../../UIs/submitandcancelbutton';
 import axios from '../../axios';
 
+import Tablehead from '../../components/activities/tablehead'
+
 import { sortObjectByProperty } from '../../sortObjectByProperty'
 
 
@@ -86,11 +88,20 @@ class Activities extends Component {
 
     }
     componentDidMount(){
-        console.log("componentDidMount");
+      
        
         axios.get('/event.json')
              .then((res)=>{
-                 this.setState({td:sortObjectByProperty(res.data,'Eventname', 'ascending')})
+                 let now = new Date();
+                 let data = res.data;
+                 for(let d in data){
+                     let date = new Date(data[d]['Date'])
+                     
+                     if(date < now){
+                         data.delete(d)
+                     }
+                 }
+                 this.setState({td:sortObjectByProperty(data,'Eventname', 'ascending')})
              })
              .catch((err)=>{
                  console.log(err)
@@ -253,10 +264,8 @@ class Activities extends Component {
     }
     render() {
        
-        console.log("render")
-        let ths = this.state.th.map((head) => {
-            return <th columnname={head} key={head}>{head}</th>
-        });
+     
+      
         let tds = [];
         tds=this.prepareTableContent()
         
@@ -306,8 +315,12 @@ class Activities extends Component {
                 onChange={() => this.search()} />
             <table id="activitytable" className={mystyle.activitytable}>
                 <caption>Activities & Events</caption>
+                
+                {/* let ths = this.state.th.map((head) => {
+            return <th columnname={head} key={head}>{head}</th>
+        }); */}
                 <thead onClick={(e) => this.sorttable(e)}>
-                    <tr>{ths}</tr>
+                    <Tablehead columnname={this.state.th}></Tablehead>
                 </thead>
                 <tbody>
                     {tds}
