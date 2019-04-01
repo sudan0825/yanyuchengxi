@@ -72,14 +72,13 @@ export const auth = (data) => {
 
         dispatch(authStart());
         if (authData.isSignUp) {
-            return firebase.auth().createUserWithEmailAndPassword(authData.Username, authData.Password)
+            return firebase.auth().createUserWithEmailAndPassword(authData.username, authData.password)
                 .then(res => {
-                    console.log('sign up')
+                    let data = res.user
+                    console.log('sign up', data.uid)
                     setSessionPersistence();
-                    dispatch(authSuccess(authData));
-                    
-
-                    
+                    dispatch(authSuccess());
+                    // dispatch(authSuccess(authData));
                 })
                 .catch((err) => {
                     let code = err.code;
@@ -94,7 +93,8 @@ export const auth = (data) => {
         } else {
             return firebase.auth().signInWithEmailAndPassword(authData.username, authData.password)
                 .then(res => {
-                   
+                    let data = res.user
+                    console.log('login', data.uid)
                     setSessionPersistence()
                     dispatch(authSuccess());
                 })

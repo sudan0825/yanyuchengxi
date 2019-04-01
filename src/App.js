@@ -5,23 +5,31 @@ import { Route, Switch, BrowserRouter, Redirect, Link } from 'react-router-dom';
 import Homepage from './containers/home/homepage';
 import Activites from './containers/activities/activities';
 import Aboutus from './components/aboutus/aboutus';
-import Login from './containers/login/login';
+import Signin from './containers/login/signin';
 import Profile from './containers/login/profile';
+import  Signup from './containers/login/signup'
 import Personalprofile from './containers/home/PersonalProfile/Personalprofile';
 import * as action from './store/actions/auth';
 
+
 //connect to redux
 import { connect } from 'react-redux';
+import Backcurtain from './UIs/backcurtain';
 
 
 class App extends Component {
   state = {
-    loggedin: true,
-  
+    showalert: true,
   }
 
 componentDidMount(){
+  setTimeout(()=>this.removeAlert(), 5000)
+
   window.addEventListener('scroll',this.onwindowscroll)
+}
+
+removeAlert(){
+  this.setState({showalert:false})
 }
 onwindowscroll(){
   if(window.pageYOffset>80){
@@ -52,21 +60,19 @@ onwindowscroll(){
   routes = (
     <Switch>
       <Route exact path="/" render={() => (
-        this.state.loggedin ? (<Redirect to="/home" />) : (<Login />)
+        this.props.isAutheticated ? (<Redirect to="/home" />) : (<Signin />)
       )} />
       <Route path="/aboutus" component={Aboutus}></Route>
       <Route path="/personalprofile" component={Personalprofile} ></Route>
       <Route path="/profile" exact component={Profile} ></Route>
-      <Route path="/login" component={Login} ></Route>
+      <Route path="/signup" component={Signup}></Route>
+      <Route path="/signin" component={Signin} ></Route>
       <Route path="/home" exact component={Homepage}></Route>
       <Route path="/activities" component={Activites}></Route>
 
     </Switch>
   )
-  alertwindow() {
-
-    setTimeout(window.alert("why you leave me "), 1000)
-  }
+ 
   cancel(){
 
     this.setState({isLogIn:true})
@@ -76,15 +82,17 @@ onwindowscroll(){
   }
   render() {
     return (<BrowserRouter>
-     <div className="App"  >
 
+     <div className="App"  >
+  {this.state.showalert? <Backcurtain click={()=>this.removeAlert()}><div className="homepagealert">The site is created since March 5h, 2019. 
+      It is still under on construction. Some UIs are placeholders. Check About us for detail</div></Backcurtain> :null}
         <header className="App-header">
-          <p id="logo"><Link to="home">有我的日子，你不在孤单</Link></p>
+          <p id="logo"><Link to="home">Love Talks</Link></p>
           <nav>
             <NavList />
           </nav>
           <div className="logandsign">
-            {this.props.isAutheticated?null:<Link to="login">Log in</Link>}
+            {this.props.isAutheticated?null:<Link to="signin">Log in</Link>}
             <Link onClick={this.props.logout} to="/">Log out</Link>
           </div>
         </header>

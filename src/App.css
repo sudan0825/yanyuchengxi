@@ -19,24 +19,38 @@
 }
 .App-header a{
   text-decoration: none;
-
- 
 }
 .App-header a:active{
    color: #a124b7;;
 }
+.homepagealert{
+  position: fixed;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  height: 200px;
+  width: 400px;
+  font-size: 22px;
+  background-color: #61dafb;
+  z-index: 20px;
+  padding: 30px 38px;
+  font-weight: 700;
+  border-radius: 18px;
+  color: rgb(233, 233, 227);
+
+}
 #logo{
   width: 52%;
   height: 60px;
-  font-size: 36px;
+  font-size: 42px;
   font-weight: bolder;
-  text-shadow: 3px 3px 6px #2b192e;
+  text-shadow: 3px 3px 6px rgb(20, 36, 1);
   color:rgb(228, 217, 217);
   margin-bottom: 46px;
 
 }
 #logo>a{
-  color: rgb(223, 228, 217);
+  color: rgb(110, 190, 12);
 }
 .logandsign{
   position: absolute;

@@ -20,15 +20,15 @@ const authStart = (state, action) => {
 
 const authSuccess = (state, action) => {
   
-    axios.post('/userInfo.json',action.data)
-                        .then((res)=>{
-                            console.log('success')
-                            console.log(res)
-                        })
-                        .catch(err=>{
-                            console.log('fail')
-                            console.log(err)
-                        })
+    // axios.post('/userInfo.json',action.data)
+    //                     .then((res)=>{
+    //                         console.log('success')
+    //                         console.log(res)
+    //                     })
+    //                     .catch(err=>{
+    //                         console.log('fail')
+    //                         console.log(err)
+    //                     })
 
     return updateState(state, {
         redirecPath: '/',

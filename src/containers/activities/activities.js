@@ -88,26 +88,30 @@ class Activities extends Component {
 
     }
     componentDidMount(){
+      console.log("activity mount")
+       this.getEventsFromServer()
       
-       
-        axios.get('/event.json')
-             .then((res)=>{
-                 let now = new Date();
-                 let data = res.data;
-                 for(let d in data){
-                     let date = new Date(data[d]['Date'])
-                     
-                     if(date < now){
-                         data.delete(d)
-                     }
-                 }
-                 this.setState({td:sortObjectByProperty(data,'Eventname', 'ascending')})
-             })
-             .catch((err)=>{
-                 console.log(err)
-             })
     }
-  
+    getEventsFromServer(){
+        axios.get('/event.json')
+        .then((res)=>{
+           
+            let now = new Date();
+            let data = res.data;
+            for(let d in data){
+                let date = new Date(data[d]['Date'])
+                
+                if(date < now){
+                    delete data[d]
+                }
+            }
+          
+            this.setState({td:sortObjectByProperty(data,'Eventname', 'ascending')})
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
     //seach an event by it's place or name
     search() {
 
@@ -259,16 +263,19 @@ class Activities extends Component {
             }
             let moreParticipantAlert = false
             if(participant > accommodaties){
-                console.log("participant more than commodation");
+              
                 moreParticipantAlert = true
             }
             let tdata = heads.map(head=>{
-                return <td  key={head}>{map.get(head)}</td>
+                return <td   key={head}>{map.get(head)}</td>
             })
             return (<tr key={record} 
                         className={moreParticipantAlert?[mystyle.datarow, mystyle.moreParticipantAlert].join(' '):mystyle.datarow}
                         onFocus={(e)=>this.changeEventDetail(e)}
-                        >{tdata}</tr>)
+                        title={moreParticipantAlert?"More Participant than space allowed":null}>
+                        {tdata}  
+                        
+                        </tr>)
                 
         })
         return tds;
@@ -336,9 +343,8 @@ class Activities extends Component {
                 <tbody>
                     {tds}
                 </tbody>
-
-
             </table>
+           
         </div>)
     }
 }

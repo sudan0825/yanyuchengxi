@@ -1,11 +1,14 @@
 .loginpage{
     width: 50%;
     margin: 50px auto;
-    background-color: antiquewhite;
+    background-color: rgb(211, 216, 219);
+    border: 3px solid rgb(170, 186, 196);
   
 
 }
-
+.passwordRetrieve{
+  margin: 15px;
+}
 .editfile{
     width: 56%;
     text-align: center;

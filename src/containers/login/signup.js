@@ -11,7 +11,7 @@ import * as action from '../../store/actions/auth';
 import { Redirect } from 'react-router-dom'
 
 
-class Login extends Component {
+class Register extends Component {
 
     state = {
         user: {
@@ -56,7 +56,9 @@ class Login extends Component {
         err: ""
 
     }
-  
+    componentDidUpdate(){
+       
+    }
     submit(e) {
         
         e.preventDefault();
@@ -70,7 +72,7 @@ class Login extends Component {
             let err = 'please input a valid Password value ';
             this.setState({ err: err })
         }else{
-           this.props.auth({username:name, password:pw})
+           this.props.auth({username:name, password:pw,isSignUp: true})
         } 
     }
    cancel(){
@@ -134,13 +136,14 @@ class Login extends Component {
         return (<div className={mystyle.loginpage}>
             {this.props.isAutheticated? <Redirect to = {this.props.authRedirectPath}/>:null}
             <form > 
-                <h1>Log in</h1>
+                <h1>Register</h1>
 
                 {formfield}
                 {this.state.err ? <div id="errorInput">{this.state.err}</div> : null}
                 {this.props.error?<div id="errorInput">{this.props.error}</div> : null}
+
                 <Submitandcancel submit={(e)=>this.submit(e)} cancel={()=>this.cancel()}></Submitandcancel>
-                <Link to="profile">New User? Please click here to regist</Link>
+                
 
             </form>
 
@@ -167,4 +170,4 @@ const mapActionToProps = dispatch => {
 
     }
 }
-export default connect(mapStateToProps, mapActionToProps)(Login);
+export default connect(mapStateToProps, mapActionToProps)(Register);

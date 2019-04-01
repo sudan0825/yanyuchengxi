@@ -90,6 +90,15 @@ class Profile extends Component {
                 value:'',
                 class: "inputUI"
             },
+            City: {
+                elemType: 'input',
+                elemConfig: {
+                    type: 'string',
+                    placeholder: 'City Name',
+                },
+                value:'',
+                class: "inputUI"
+            },
             Education: {
                 elemType: 'select',
                 elemConfig: {

@@ -21,7 +21,7 @@ const Aboutus = (props) => {
               If you have any sugestion about how a social website like this should be,
               please email me: sudan0825@gmail.com. I would love to make your idea to
               the real world! Since I work on the project after work, the progress may
-               be not that fast. Anyway, I will do all my best because I love it.
+               be not that fast. Anyway, I will do all my best to make it happen.
             </p>
             <p>Nothing will be better than a couple meets each other at my website one day! :)</p>
         </div>
@@ -35,7 +35,7 @@ const Aboutus = (props) => {
         <div className={mystyle.text}>
             <p>Life is hard if you handle everything by yourself. Find the one who stands for you when you
                 tired; Find the one who you want to shield. Life is short. We should try out best to live the way we want to live.
-                Don't afraid hurt. It always accompany by happiness. That makes a life colorful. </p>
+                Don't afraid hurt. It always accompany by happiness. That makes life a life. </p>
             <p> </p>
         </div>
 

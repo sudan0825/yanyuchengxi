@@ -68,10 +68,12 @@ caption{
 .activitytable  .datarow:hover{
     background-color: orange;
     cursor: pointer;
- 
-
 }
 
 .moreParticipantAlert{
     color: red
 }
+
+
+
+
