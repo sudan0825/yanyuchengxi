@@ -62,17 +62,33 @@
 .selectUIdiv option{
     padding: 3px;
 }
+.column{
+    text-align: left;
+    overflow: hidden;
+    height: 256px;
+    border-radius: 8px;
+   
 
-.column:nth-child(even){
+}
+.column span{
+    font-weight: bold;
+    margin-right: 12px;
+}
+.homepageLink{
+    text-decoration: none;
+    color: black;
+    height: 300px;
+   
+    padding: 22px;
+}
+.homepageLink:nth-child(even){
     background-color: rgb(226, 253, 244);
 }
 
-.column:nth-child(odd){
+.homepageLink:nth-child(odd){
     background-color: rgb(231, 231, 250);
 }
-.column{
-    border-radius: 8px;
-}
+
 .homepage img{
     width: 95%;
     padding-top: 10px;

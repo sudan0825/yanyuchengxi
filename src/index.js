@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import authReducer from './store/reducers/auth'
+import authReducer from './store/reducers/auth';
+import homepageloadingReducer from './store/reducers/homepagedata'
 
 
 //firebase configuration
@@ -38,7 +39,8 @@ const logger = store =>{
 }
 //combine reducer
 const rootReducer = combineReducers({
-    authReducer:authReducer
+    authReducer:authReducer,
+    homepageloadingReducer:homepageloadingReducer
 })
 //create store
 const store = createStore(rootReducer, composeEnhancers(

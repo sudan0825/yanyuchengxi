@@ -2,30 +2,49 @@ import React, { Component } from 'react';
 import Profile from '../../components/home/profiles';
 import mystyle from './home.module.css';
 import Filters from './filtersection';
+import { Link } from 'react-router-dom'
+
+//connect to react-redux;
+import { connect } from 'react-redux';
+import * as action from '../../store/actions/homepagedata';
+import { deepCompare } from '../../deepCompare'
 
 
 
 class Homepage extends Component {
     state = {
-        employee: new Array(40).fill(),
         profiles: [],
         isSelectionShow: false
 
     }
     componentDidMount() {
-        this.init()
+        console.log("did mount")
+        this.props.loadingUserData();
+        if(this.state.profiles){
+            this.populateDataToUI(this.props.userInfo)
+        }
+        
     }
-    init() {
+    shouldComponentUpdate(nextProps, nextState){
 
-        let newprofiles = this.state.employee.map((e, i) => {
-            let g
-            if (i % 2 === 0) {
-                g = "female"
-            } else {
-                g = "male"
-            }
-            return <Profile key={i} name={i} title={i} description={i} gender={g}></Profile>
-        });
+        if(deepCompare(this.props,nextProps) && deepCompare(this.state,nextState)) return false;
+        return true
+
+    }
+    componentDidUpdate(){
+       this.populateDataToUI(this.props.userInfo)
+        
+    }
+    populateDataToUI(userInfo) {
+       let newprofiles = []
+       for(let k in userInfo){
+           newprofiles.push(
+            <Link className={mystyle.homepageLink} key={k} to={"personalprofile?id=" + userInfo[k].id}>
+               <Profile id={userInfo[k].id} data={userInfo[k].data}></Profile>
+            </Link>
+           )
+
+           }
         this.setState({ profiles: newprofiles })
     }
 
@@ -66,7 +85,6 @@ class Homepage extends Component {
 
     }
     render() {
-
         return (
             <div id="homepage" className={mystyle.homepage}>
                 <div id="showselection" className={mystyle.showselection}>
@@ -83,7 +101,7 @@ class Homepage extends Component {
 
                 <div className={mystyle.gridcontainer}>
 
-                    {this.state.profiles}
+                 {this.state.profiles}
                 </div>
             </div>
 
@@ -91,4 +109,22 @@ class Homepage extends Component {
     }
 
 }
-export default Homepage;
+
+const mapStateToProps = state => {
+
+    return {
+
+        error: state.homepageloadingReducer.error,
+        userInfo:state.homepageloadingReducer.userInfo
+
+    }
+}
+
+const mapActionToProps = dispatch => {
+    return {
+        loadingUserData: () => dispatch(action.loadingUserData()),
+        
+
+    }
+}
+export default connect(mapStateToProps,mapActionToProps)(Homepage);

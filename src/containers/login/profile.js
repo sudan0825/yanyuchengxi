@@ -270,7 +270,7 @@ const mapStateToProps = state => {
 
 const mapActionToProps = dispatch => {
     return {
-        auth: (data) => dispatch(action.auth(data)),
+       
         deleteError: (data) => dispatch(action.deleteError()),
 
     }

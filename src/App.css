@@ -17,6 +17,14 @@
   z-index: 2;
   
 }
+#userID{
+  position: absolute;
+  right: 80px;
+  bottom: 15px;
+}
+#userID>span{
+  color: red;
+}
 .App-header a{
   text-decoration: none;
 }

@@ -13,10 +13,12 @@ export const authStart = () => {
     };
 }
 
-export const authSuccess = (data) => {
+export const authSuccess = (id,name) => {
+    let getname = name.substring(0,name.indexOf('@'))
     return {
         type: actionTypes.AUTH_SUCCESS,
-        data:data
+        id:id,
+        name:getname
     }
 }
 
@@ -77,7 +79,7 @@ export const auth = (data) => {
                     let data = res.user
                     console.log('sign up', data.uid)
                     setSessionPersistence();
-                    dispatch(authSuccess());
+                    dispatch(authSuccess(data.uid,data.email));
                     // dispatch(authSuccess(authData));
                 })
                 .catch((err) => {
@@ -94,9 +96,9 @@ export const auth = (data) => {
             return firebase.auth().signInWithEmailAndPassword(authData.username, authData.password)
                 .then(res => {
                     let data = res.user
-                    console.log('login', data.uid)
+                    console.log('login', data.email,data.uid)
                     setSessionPersistence()
-                    dispatch(authSuccess());
+                    dispatch(authSuccess(data.uid,data.email));
                 })
                 .catch((error)=> {
                     let code = error.code;

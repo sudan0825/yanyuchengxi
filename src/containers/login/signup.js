@@ -75,12 +75,14 @@ class Register extends Component {
            this.props.auth({username:name, password:pw,isSignUp: true})
         } 
     }
-   cancel(){
-       let user = this.state.user;
-       for(let elem in user){
-           user[elem].value=''
-       }
-       this.setState({user:user})
+   cancel(e){
+     e.preventDefault();
+     if(this.props.isAutheticated){
+         window.location='/'
+     }else{
+        window.location='/signin'
+     }
+
    }
     chechValidity = (value, rules) => {
         if (!rules) return true;
@@ -142,7 +144,7 @@ class Register extends Component {
                 {this.state.err ? <div id="errorInput">{this.state.err}</div> : null}
                 {this.props.error?<div id="errorInput">{this.props.error}</div> : null}
 
-                <Submitandcancel submit={(e)=>this.submit(e)} cancel={()=>this.cancel()}></Submitandcancel>
+                <Submitandcancel submit={(e)=>this.submit(e)} cancel={(e)=>this.cancel(e)}></Submitandcancel>
                 
 
             </form>

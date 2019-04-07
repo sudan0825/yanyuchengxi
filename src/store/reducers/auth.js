@@ -3,12 +3,14 @@ import { updateState } from '../../updatestate';
 
 import firebase from "firebase/app";
 import 'firebase/auth';
-import 'firebase/firestore'
-import axios from '../../axios';
+
+
 
 
 const initialState = {
     isAuthed:false,
+    name:'',
+    id:'',
     error:'',
     loading:false,
     redirecPath:'/'
@@ -18,21 +20,12 @@ const authStart = (state, action) => {
     return updateState(state, { error: null, loading: true });
 };
 
-const authSuccess = (state, action) => {
-  
-    // axios.post('/userInfo.json',action.data)
-    //                     .then((res)=>{
-    //                         console.log('success')
-    //                         console.log(res)
-    //                     })
-    //                     .catch(err=>{
-    //                         console.log('fail')
-    //                         console.log(err)
-    //                     })
-
+const authSuccess = (state, action) => { 
     return updateState(state, {
         redirecPath: '/',
-        isAuthed: true
+        isAuthed: true,
+        name:action.name,
+        id:action.id
     });
 };
 

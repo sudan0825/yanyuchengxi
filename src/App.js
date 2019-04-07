@@ -95,6 +95,12 @@ onwindowscroll(){
             {this.props.isAutheticated?null:<Link to="signin">Log in</Link>}
             <Link onClick={this.props.logout} to="/">Log out</Link>
           </div>
+          {this.props.isAutheticated?
+               <div id="userID">Welcome 
+                  <Link to={'/personalprofile?id='+this.props.name}>
+                    <span>{this.props.name}</span>
+                   </Link>
+                </div>:null}
         </header>
         <main>
           {this.routes}
@@ -111,9 +117,10 @@ const mapStateToProps = state => {
 
   return {
 
-      isAutheticated: state.authReducer.isAuthed
-    
-
+      isAutheticated: state.authReducer.isAuthed,
+      name:state.authReducer.name,
+      id:state.authReducer.id
+  
   }
 }
 
