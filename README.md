@@ -26,5 +26,5 @@ Features till today-March 23rd, 2019:
 13. Utilize localstorage to imporve web performance
 14. create diff function in shouldcomponentupdate life cycle
 15. Modulize commone functions, such as deepcopy objects, deep compare objects etc.
-16. URL protected with autherization. 
+16. URL protected with autherization. To bypass URL protection, please open this URL:https://yanyuchengxi.firebaseapp.com, 
 

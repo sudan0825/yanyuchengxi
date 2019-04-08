@@ -85,7 +85,7 @@ onwindowscroll(){
 
      <div className="App"  >
   {this.state.showalert? <Backcurtain click={()=>this.removeAlert()}><div className="homepagealert">The site is created since March 5h, 2019. 
-      It is still under on construction. Some UIs are placeholders. Check About us for detail</div></Backcurtain> :null}
+      It is still under on construction. Some UIs are placeholders. Check README.md in Github for detail</div></Backcurtain> :null}
         <header className="App-header">
           <p id="logo"><Link to="home">Love Talks</Link></p>
           <nav>
