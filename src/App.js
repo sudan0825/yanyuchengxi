@@ -96,8 +96,8 @@ onwindowscroll(){
             <Link onClick={this.props.logout} to="/">Log out</Link>
           </div>
           {this.props.isAutheticated?
-               <div id="userID">Welcome 
-                  <Link to={'/personalprofile?id='+this.props.name}>
+               <div id="userID">Welcome &nbsp; &nbsp; 
+                  <Link to={'/personalprofile?id='+this.props.id}>
                     <span>{this.props.name}</span>
                    </Link>
                 </div>:null}

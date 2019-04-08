@@ -10,7 +10,7 @@ This project is starting at March 5th 2019 and suspend at April 7th because my p
 
 Nothing will be better than a couple meets each other at my website one day! :)
 
-Features till today-March 23rd, 2019:
+Features till today-April 7th, 2019:
 1. Toggle table to filter user search in activities page
 2. Use parallax background in About Us page
 3. Imporve User experience by adjust repsonse time, such as delay navigation bar background color change
@@ -27,4 +27,4 @@ Features till today-March 23rd, 2019:
 14. create diff function in shouldcomponentupdate life cycle
 15. Modulize commone functions, such as deepcopy objects, deep compare objects etc.
 16. URL protected with autherization. To bypass URL protection, please open this URL:https://yanyuchengxi.firebaseapp.com, 
-
+17. Fix navigation bar position when scroll down
