@@ -64,7 +64,7 @@
 }
 .column{
     text-align: left;
-    overflow: hidden;
+    overflow: auto;
     height: 256px;
     border-radius: 8px;
 }
@@ -81,8 +81,7 @@
     text-decoration: none;
     color: black;
     height: 300px;
-   
-    padding: 22px;
+    padding: 16px 22px 16px 16px;
 }
 .homepageLink:nth-child(even){
     background-color: rgb(226, 253, 244);
