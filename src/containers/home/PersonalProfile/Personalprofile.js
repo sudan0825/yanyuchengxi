@@ -183,6 +183,7 @@ class Personalprofile extends Component {
             </div>
 
             <div id="item4" className={mystyle.item4}>
+            <h2>Introduction</h2>
                 {this.state.data.SelfIntro}
                 {/* <button onClick={()=>this.adddata()}></button> */}
 

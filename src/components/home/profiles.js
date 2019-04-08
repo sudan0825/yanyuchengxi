@@ -5,7 +5,7 @@ import mystyle from '../../containers/home/home.module.css'
 const Profile = (props) => {
     return <div className={mystyle.column}>
         
-        <p><span> Name: </span>{props.data.Name}</p>
+        <h1>{props.data.Name}</h1>
         <p><span> Gender:</span>{props.data.Gender}</p>
         <p><span> Age:</span>{props.data.Age}</p>
         <p><span> Height:</span>{props.data.Height}</p>

@@ -67,8 +67,11 @@
     overflow: hidden;
     height: 256px;
     border-radius: 8px;
-   
-
+}
+.column h1{
+    text-align: center;
+    color: rgb(145, 9, 104);
+    margin: 0;
 }
 .column span{
     font-weight: bold;
