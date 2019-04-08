@@ -28,7 +28,10 @@
   
     background-color:rgb(226, 253, 244);
     }
-
+.item1 h1{
+    margin-top:20%;
+    
+}
 .item2{
     width: 66%;
     height: 100%;
