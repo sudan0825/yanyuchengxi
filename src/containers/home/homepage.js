@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Profile from '../../components/home/profiles';
+import Heart from '../../components/home/heart';
 import mystyle from './home.module.css';
 import Filters from './filtersection';
-import { Link } from 'react-router-dom'
+
 
 //connect to react-redux;
 import { connect } from 'react-redux';
@@ -18,34 +18,46 @@ class Homepage extends Component {
 
     }
     componentDidMount() {
-        console.log("did mount")
+  
         this.props.loadingUserData();
-        if(this.state.profiles){
-            this.populateDataToUI(this.props.userInfo)
-        }
-        
+       
+       
+   
     }
-    shouldComponentUpdate(nextProps, nextState){
+    // shouldComponentUpdate(nextProps, nextState){
 
-        if(deepCompare(this.props,nextProps) && deepCompare(this.state,nextState)) return false;
-        return true
+    //     if(deepCompare(this.props,nextProps) && deepCompare(this.state,nextState)) return false;
+    //     return true
 
-    }
-    componentDidUpdate(){
-       this.populateDataToUI(this.props.userInfo)
+    // }
+    // componentDidUpdate(){
+    //     this.populateDataToUI(this.props.userInfo)
         
+    // }
+    clickonHeart(e){
+
+        console.log(e.target, e.currentTarget)
+
     }
     populateDataToUI(userInfo) {
+       
        let newprofiles = []
        for(let k in userInfo){
+         
            newprofiles.push(
-            <Link className={mystyle.homepageLink} key={k} to={"personalprofile?id=" + userInfo[k].id}>
-               <Profile id={userInfo[k].id} data={userInfo[k].data}></Profile>
-            </Link>
+           
+             
+               <Heart click={()=>this.props.retrieveUserInfo(userInfo[k]) } 
+                      clickHeart = {(e)=> this.clickonHeart(e)}
+                        id={userInfo[k].id} 
+                        data={userInfo[k].data}>
+                </Heart>
+           
            )
 
            }
-        this.setState({ profiles: newprofiles })
+           
+        return newprofiles
     }
 
 
@@ -85,6 +97,7 @@ class Homepage extends Component {
 
     }
     render() {
+      
         return (
             <div id="homepage" className={mystyle.homepage}>
                 <div id="showselection" className={mystyle.showselection}>
@@ -94,14 +107,13 @@ class Homepage extends Component {
                 <div id="filtersection" className={mystyle.filtersection} >
                     <h1>Selection</h1>
                     <Filters></Filters>
-
-
-
                 </div>
 
                 <div className={mystyle.gridcontainer}>
+               
+                {this.populateDataToUI(this.props.userInfo)}
 
-                 {this.state.profiles}
+                 
                 </div>
             </div>
 
@@ -123,6 +135,7 @@ const mapStateToProps = state => {
 const mapActionToProps = dispatch => {
     return {
         loadingUserData: () => dispatch(action.loadingUserData()),
+        retrieveUserInfo:(userInfo)=>dispatch(action.retrieveUserInfo(userInfo))
         
 
     }

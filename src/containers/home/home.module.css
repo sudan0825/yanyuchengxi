@@ -1,16 +1,17 @@
 .homepage{
     position: relative;
+    background-color: white;
    
 
 }
 .gridcontainer{
    display: grid;
-   grid-template-columns: auto auto auto auto;
+   grid-template-columns: 24% 24% 24% 24%;
    grid-gap: 10px;
-   padding:10px;
    top: 0;
    left:0;
    position: relative;
+   width: 100%;
    
 }
 .showselection>div{
@@ -80,15 +81,9 @@
 .homepageLink{
     text-decoration: none;
     color: black;
-    height: 300px;
-    padding: 16px 22px 16px 16px;
-}
-.homepageLink:nth-child(even){
-    background-color: rgb(226, 253, 244);
-}
-
-.homepageLink:nth-child(odd){
-    background-color: rgb(231, 231, 250);
+    height: 244px;
+    margin: 8px;
+   
 }
 
 .homepage img{
@@ -110,8 +105,122 @@
 }
 
 
-@media screen and (max-width:500px){
+.heartcontainer{
+    margin: auto;
+    position: relative;
+    background-image: url("../../assets/heartMedium.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 280px;
+    height: 230px;
+    transition: display 2s;
+    box-shadow: 3px 3px 3px 2px rgb(194, 192, 192);
+}
+.infoInHeartl, .infoInHeartr{
+    width: 120px;
+    position: absolute;
+    margin: auto;
+    font-size: 14px;
+    color: aquamarine;
+    transition:2s;
+    font-weight: bold;
+    transition: display 2s;
+
+
+}
+.infoInHeartl{
+   
+    left: 14%;
+    top:19%;
+    transform: rotate(30deg);
+    -webkit-transform: rotate(-30deg);
+  
+}
+
+.infoInHeartr{
     
+    left: 46%;
+    top:50%;
+    transform: rotate(30deg);
+    -webkit-transform: rotate(30deg);
+ 
+}
+.infoInHeartr>p, .infoInHeartl>p{
+    margin: 0;
+}
+.info{
+    position: absolute;
+    top: 250px;
+    left: 1.0;
+    color: rgb(37, 48, 80);
+    text-align: justify;
+    height: auto;
+    font-size: 16px;
+    opacity: 0;
+    background-color:white;
+    transition:ease-in-out 1.5s;
+    z-index: 5;
+    border-radius: 8px;
+    border:2px groove rgb(21, 55, 100);
+    padding: 15px;
+ 
+
+}
+.info>p:last-child{
+    text-align: center;
+}
+  .persernalInfo{
+      
+      position: relative;
+      top:0;
+      left: 0;
+      width: 100%;
+      height: 100%; 
+      
+      
+  }
+  .smallhearttag{
+    background-image: url("../../assets/heartsmall.png");
+    width: 50px;
+    height: 50px;
+    position: relative;
+    margin: auto;
+
+}
+  .persernalInfo:hover .smallhearttag{
+    display: block;
+}
+ 
+.persernalInfo:hover .heartcontainer,.persernalInfo:hover .infoInHeartl, .persernalInfo:hover .infoInHeartr{
+    display: none;
+  }
+ 
+  .persernalInfo:hover .info{
+      top:30px;
+      opacity: 1.0;
+  }
+ 
+  @media screen and (max-width:1000px){
     
+    .gridcontainer{
+        grid-template-columns:33% 33% 33%;
+        margin: 15px;
+    }
+
+}
+@media screen and (max-width:800px){
+    
+    .gridcontainer{
+        grid-template-columns:50% 50%;
+        margin: 15px;
+    }
+
+}
+@media screen and (max-width:400px){
+    
+    .gridcontainer{
+        grid-template-columns:100%;
+        margin: 15px;
+    }
 
 }

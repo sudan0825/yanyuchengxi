@@ -11,9 +11,11 @@ const initialState = {
     isAuthed:false,
     name:'',
     id:'',
+    thumnail:'',
     error:'',
     loading:false,
     redirecPath:'/'
+
 }
 const authStart = (state, action) => {
    
@@ -22,10 +24,11 @@ const authStart = (state, action) => {
 
 const authSuccess = (state, action) => { 
     return updateState(state, {
-        redirecPath: '/',
         isAuthed: true,
         name:action.name,
-        id:action.id
+        id:action.id,
+        thumnail:action.src
+        
     });
 };
 

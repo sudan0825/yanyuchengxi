@@ -3,6 +3,8 @@ import Input from '../../UIs/input';
 import Submitandcancel from '../../UIs/submitandcancelbutton';
 import mystyle from './login.module.css';
 
+import axios from '../../axios'
+
 //connect to redux
 
 import { connect } from 'react-redux';
@@ -126,6 +128,7 @@ class Profile extends Component {
                         "What makes you happy? What kind of relationship are you looking for?",
 
                 },
+                value:'',
                 labelvalue: 'Who are you',
                 class: "textarea"
 
@@ -137,6 +140,7 @@ class Profile extends Component {
                     placeholder: "Characters? Personalities? Hobbies?",
 
                 },
+                value:'',
                 labelvalue: 'What are you looking for',
                 class: "textarea"
 
@@ -187,8 +191,8 @@ class Profile extends Component {
         let bshape = this.state.user.BodyShape.value;
         let income = this.state.user.Salary.value;
         let degree = this.state.user.Education.value;
-        let me = this.state.user.Whoareyou;
-        let you = this.state.user.Whatareyoulookingfor;
+        let me = this.state.user.Whoareyou.value;
+        let you = this.state.user.Whatareyoulookingfor.value;
         console.log('create a new file')
         if (!this.chechValidity(name, this.state.user.Username.validation)) {
             let err = 'please input a valid Username value ';
@@ -197,19 +201,22 @@ class Profile extends Component {
             let err = 'please input a valid Password value ';
             this.setState({ err: err })
         } else {
-            this.props.auth({
-                Username: name, Password: pw, isSignUp: true,
+            this.props.createProfile({
+                Username: name, Password: pw,
                 Birthday: bd, Height: height, BodyShape: bshape,
                 Salary: income, Degree: degree, Me: me, You: you
             })
         }
+       
+       
+      
     }
     cancel() {
         let user = this.state.user;
         for (let elem in user) {
             user[elem].value = ''
         }
-        this.setState({ user: user })
+        this.setState({user: user })
     }
     render() {
         const formElementArray = [];
@@ -271,7 +278,7 @@ const mapStateToProps = state => {
 const mapActionToProps = dispatch => {
     return {
        
-        deleteError: (data) => dispatch(action.deleteError()),
+        deleteError: () => dispatch(action.deleteError()),
 
     }
 }

@@ -3,6 +3,11 @@ import SelectUI from '../../UIs/selectUI';
 import mystyle from './home.module.css';
 import Submitandcancel from '../../UIs/submitandcancelbutton';
 
+import * as action from '../../store/actions/homepagedata';
+
+//connect to redux
+import { connect } from 'react-redux'
+
 
 class Filtersection extends Component {
     state = {
@@ -221,4 +226,17 @@ class Filtersection extends Component {
     }
 }
 
-export default Filtersection;
+const mapStateToProps = state =>{
+    return {
+
+    }
+}
+
+const mapActionToProps = dispatch =>{
+    return {
+        getUserMeetRequirement:(query)=>dispatch(action.getUserMeetRequirement(query))
+
+    }
+}
+
+export default connect(mapStateToProps,mapActionToProps)(Filtersection);

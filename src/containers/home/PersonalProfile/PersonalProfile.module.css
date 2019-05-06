@@ -25,13 +25,22 @@
     width: 33%;
     height: 100%;
     float: left;
-  
+    
     background-color:rgb(226, 253, 244);
     }
-.item1 h1{
-    margin-top:20%;
-    
+.item1 img{
+    width: 80px;
+    height: 100px;
+    margin-top: 6%;
+    border-radius:  40px / 50px;
+    object-fit:fill;
+    border: 1px ridge #136d74;
+   
 }
+.item1 h1{
+    margin: 3%;
+}
+
 .item2{
     width: 66%;
     height: 100%;
@@ -66,6 +75,7 @@
     padding: 30px;
     text-align: left;
     font-size: 16px;
+    white-space: pre-wrap;
  
 }
 .item4 h2{

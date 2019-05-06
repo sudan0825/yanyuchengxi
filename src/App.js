@@ -12,6 +12,7 @@ import Personalprofile from './containers/home/PersonalProfile/Personalprofile';
 import * as action from './store/actions/auth';
 
 
+
 //connect to redux
 import { connect } from 'react-redux';
 import Backcurtain from './UIs/backcurtain';
@@ -24,8 +25,8 @@ class App extends Component {
 
 componentDidMount(){
   setTimeout(()=>this.removeAlert(), 5000)
+  window.addEventListener('scroll',this.onwindowscroll);
 
-  window.addEventListener('scroll',this.onwindowscroll)
 }
 
 removeAlert(){
@@ -59,12 +60,10 @@ onwindowscroll(){
 
   routes = (
     <Switch>
-      <Route exact path="/" render={() => (
-        this.props.isAutheticated ? (<Redirect to="/home" />) : (<Signin />)
-      )} />
+      <Route exact path="/" component={Homepage}></Route>
       <Route path="/aboutus" component={Aboutus}></Route>
       <Route path="/personalprofile" component={Personalprofile} ></Route>
-      <Route path="/profile" exact component={Profile} ></Route>
+      <Route path="/profile" component={Profile} ></Route>
       <Route path="/signup" component={Signup}></Route>
       <Route path="/signin" component={Signin} ></Route>
       <Route path="/home" exact component={Homepage}></Route>
@@ -98,6 +97,7 @@ onwindowscroll(){
           {this.props.isAutheticated?
                <div id="userID">Welcome &nbsp; &nbsp; 
                   <Link to={'/personalprofile?id='+this.props.id}>
+                    <img src={this.props.src} alt ={this.props.id}></img>
                     <span>{this.props.name}</span>
                    </Link>
                 </div>:null}
@@ -119,7 +119,8 @@ const mapStateToProps = state => {
 
       isAutheticated: state.authReducer.isAuthed,
       name:state.authReducer.name,
-      id:state.authReducer.id
+      id:state.authReducer.id,
+      src:state.authReducer.thumnail
   
   }
 }
@@ -127,8 +128,7 @@ const mapStateToProps = state => {
 const mapActionToProps = dispatch => {
   return {
       logout: () => dispatch(action.logout()),
-     
-
+      
   }
 }
 export default connect(mapStateToProps, mapActionToProps)(App);

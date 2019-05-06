@@ -131,6 +131,7 @@ class Login extends Component {
         }
       
         return (<div className={mystyle.loginpage}>
+          {console.log("this.props.authRedirectPath",this.props.authRedirectPath)}
             {this.props.isAutheticated? <Redirect to = {this.props.authRedirectPath}/>:null}
             <form > 
                 <h1>Log in</h1>

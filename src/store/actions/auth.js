@@ -3,6 +3,9 @@ import * as actionTypes from './actionType';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/storage';
+
+
 
 
 
@@ -13,12 +16,14 @@ export const authStart = () => {
     };
 }
 
-export const authSuccess = (id,name) => {
-    let getname = name.substring(0,name.indexOf('@'))
+export const authSuccess = (id,name,src) => {
+    let getname = name.substring(0,name.indexOf('@'));
     return {
         type: actionTypes.AUTH_SUCCESS,
         id:id,
-        name:getname
+        name:getname,
+        src:src
+
     }
 }
 
@@ -66,21 +71,21 @@ const setSessionPersistence = () => {
             console.log(error.message)
         });
 }
+
+
+
 export const auth = (data) => {
     return dispatch => {
-        const authData = {
-            ...data
-        };
-
+        const authData = {...data};
         dispatch(authStart());
         if (authData.isSignUp) {
             return firebase.auth().createUserWithEmailAndPassword(authData.username, authData.password)
                 .then(res => {
                     let data = res.user
-                    console.log('sign up', data.uid)
                     setSessionPersistence();
+                    dispatch(setRedirectPath('/profile'));
                     dispatch(authSuccess(data.uid,data.email));
-                    // dispatch(authSuccess(authData));
+                 
                 })
                 .catch((err) => {
                     let code = err.code;
@@ -95,10 +100,19 @@ export const auth = (data) => {
         } else {
             return firebase.auth().signInWithEmailAndPassword(authData.username, authData.password)
                 .then(res => {
-                    let data = res.user
-                    console.log('login', data.email,data.uid)
-                    setSessionPersistence()
-                    dispatch(authSuccess(data.uid,data.email));
+                    let data = res.user;
+                    let storage=firebase.storage()
+                    storage.ref('user1/user1small.jpg')
+                    .getDownloadURL()
+                    .then(url=>{
+                        dispatch(authSuccess(data.uid,data.email,url));
+                       
+                    })
+                    
+                    setSessionPersistence();
+                    dispatch(setRedirectPath('/home'));
+                   
+                   
                 })
                 .catch((error)=> {
                     let code = error.code;

@@ -2,35 +2,35 @@ import React, { Component } from 'react';
 import mystyle from './PersonalProfile.module.css';
 import Slider from '../../../components/imagesDiv/slider';
 import axios from "../../../axios";
-import file from '../../../assets/userInfo'
+import file from '../../../assets/userInfo';
+
+//connect to react-redux;
+import { connect } from 'react-redux';
+import * as action from '../../../store/actions/homepagedata';
+
+
+
 
 
 
 
 class Personalprofile extends Component {
     state = {
-        personID: '',
+       
         images: [],
         srcs: [require('../../../assets/couple.jpg'), require('../../../assets/hand.jpg'), require('../../../assets/heart.jpeg'),
         require('../../../assets/c1.jpg'), require('../../../assets/c2.jpg')],
         imageslide: false,
         numOfImage: null,
-        data: {}
 
-
-    }
-
-
-    componentDidMount() {
-        this.setState({ personID: window.location.href.substring(window.location.href.indexOf("=") + 1) },
-            function () {
-                this.retrieveUserInfo(this.state.personID)
-            })
-        let arr = new Array(5).fill(1)
-        this.setState({ images: arr });
 
 
     }
+
+
+  componentWillUnmount(){
+      
+  }
 
 
     plus() {
@@ -75,21 +75,7 @@ class Personalprofile extends Component {
 
     }
 
-    retrieveUserInfo(id) {
-        axios.get('/userInfo.json')
-            .then((res) => {
-                for (let key in res.data) {
-                    console.log(res.data[key], key, id)
-                    if (res.data[key].id === id) {
-
-                        this.setState({ data: res.data[key].data })
-                    }
-                }
-            })
-            .catch(err => {
-                console.log(err)
-            })
-    }
+  
     showmodalImage(e) {
 
         this.setState({ numOfImage: e.target.alt }, () => {
@@ -133,34 +119,41 @@ class Personalprofile extends Component {
 
 
     }
-    adddata() {
+    // adddata() {
+    //         let id = "ggSHJb7pEuW3rYfx10XmnKBiGeJ2";
+    //         let data = {
+    //             Name: "Dan",
+    //             Age: "36",
+    //             Gender: "Male",
+    //             Height: "5'10\"",
+    //             Location: "Santa Clara",
+    //             Occupation: "Hardware Engineer",
+    //             image:"gs://yanyuchengxi.appspot.com/user1",
+    //             SelfIntro: "Born and raised in Northern California.  I am very close to my family and friends and they mean the world to me.\nI've been described as laid-back, intelligent, and loyal.  I usually don't take myself too seriously.\nWork takes a lot of my time, but on weekends I like to hangout with friends, go out and have a few drinks, or explore new eateries."
+    //         }
+    //         axios.post('/userInfo.json',{id:id,data:data}).then((res)=>{
+    //             console.log(res)
+    //           }).catch((err)=>{
+    //               console.log(err)
+    //           })
 
-        // for(let i in file){
-        //     let id = i;
-        //     let data = file[i];
-
-        //     axios.post('/userInfo.json',{id:id,data:data}).then((res)=>{
-        //         console.log(res)
-        //       }).catch((err)=>{
-        //           console.log(err)
-        //       })
-        // }
-
-    }
+    // }
     render() {
-
-        console.log(this.state.data)
+       console.log(this.props.userdata.Name)
         return <div className={mystyle.personalProfile}>
-            <div className={mystyle.top}>
+           
+           <div className={mystyle.top}>
                 <div id="item1" className={mystyle.item1}>
-                    <h1>{this.state.data.Name}</h1>
+                  <img src={this.props.src}
+                      ></img>
+                    <h1>{this.props.userdata.Name}</h1>
                 </div>
                 <div id="item2" className={mystyle.item2}>
-                    <p><span> Gender:</span>{this.state.data.Gender}</p>
-                    <p><span> Age:</span>{this.state.data.Age}</p>
-                    <p><span> Height:</span>{this.state.data.Height}</p>
-                    <p><span> Location:</span>{this.state.data.Location}</p>
-                    <p><span> Occupation:</span>{this.state.data.Occupation}</p>
+                    <p><span> Gender:</span>{this.props.userdata.Gender}</p>
+                    <p><span> Age:</span>{this.props.userdata.Age}</p>
+                    <p><span> Height:</span>{this.props.userdata.Height}</p>
+                    <p><span> Location:</span>{this.props.userdata.Location}</p>
+                    <p><span> Occupation:</span>{this.props.userdata.Occupation}</p>
                     {/* <div id="bar" className={mystyle.bar}>
                         <div id="control" className={mystyle.control} onMouseDown={() => this.moveButton()}
                             onMouseUp={() => this.removebarlistner()} ></div>
@@ -184,17 +177,33 @@ class Personalprofile extends Component {
 
             <div id="item4" className={mystyle.item4}>
             <h2>Introduction</h2>
-                {this.state.data.SelfIntro}
+                {this.props.userdata.SelfIntro}
                 {/* <button onClick={()=>this.adddata()}></button> */}
 
 
             </div>
 
 
-
         </div>
     }
 }
 
+const mapStateToProps = state => {
 
-export default Personalprofile;
+    return {
+
+        src:state.homepageloadingReducer.thumnail,
+        bigc:state.homepageloadingReducer.bigPic,
+        userdata:state.homepageloadingReducer.clickedUserData
+     
+
+    }
+}
+
+const mapActionToProps = dispatch => {
+    return {
+       
+
+    }
+}
+export default connect(mapStateToProps, mapActionToProps)(Personalprofile);
